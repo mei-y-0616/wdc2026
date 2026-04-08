@@ -1,0 +1,45 @@
+.header {
+    padding: 20px 0;
+    background-color: rgb(224, 224, 224);
+    position: fixed;
+    width: 100%;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--side-padding);
+
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav ul li a {
+    position: relative;
+}
+
+.nav ul li a::before {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: blue;
+    border-radius: 2px;
+    scale: 0;
+    transform-origin: center left;
+    transition: scale 0.2s;
+}
+
+.nav ul li a:hover::before {
+    scale: 100%;
+    text-decoration: underline;
+}
+
+.navList{
+    display: flex;
+    gap: 10px;
+}

@@ -1,0 +1,42 @@
+
+
+
+.form {
+  margin-bottom: 30px;
+}
+
+.promptInput {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  height: 4rem;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.submitButton {
+  padding: 15px 60px;
+}
+
+.response {
+  padding: 10px 30px;
+  border-radius: 4px;
+  border: 1px solid var(--foreground);
+}
+
+.response>* {
+  margin-bottom: 10px;
+}
+
+.response ul {
+  list-style: disc inside;
+}
+
+.response ol {
+  list-style: decimal inside;
+}
+
+.map{
+  width: 100%;
+  height: 300px;
+}

@@ -1,4 +1,4 @@
-.page {
+/* .page {
   --background: #fafafa;
   --foreground: #fff;
 
@@ -9,92 +9,53 @@
   --button-secondary-hover: #f2f2f2;
   --button-secondary-border: #ebebeb;
 
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-family: var(--font-geist-sans);
   background-color: var(--background);
+} */
+
+
+
+.form {
+  margin-bottom: 30px;
 }
 
-.main {
-  display: flex;
-  flex: 1;
+.promptInput {
+  display: block;
   width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
+  max-width: 500px;
+  height: 4rem;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
+.submitButton {
+  padding: 15px 60px;
 }
 
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
+.response {
+  padding: 10px 30px;
+  border-radius: 4px;
+  border: 1px solid var(--foreground);
 }
 
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
+.response>* {
+  margin-bottom: 10px;
 }
 
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
+.response ul {
+  list-style: disc inside;
 }
 
-.ctas {
-  display: flex;
-  flex-direction: row;
+.response ol {
+  list-style: decimal inside;
+}
+
+.map{
   width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
+  height: 300px;
 }
 
-.ctas a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
-}
-
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
-}
-
-a.secondary {
-  border-color: var(--button-secondary-border);
-}
-
-/* Enable hover only on non-touch devices */
+/*ホバー可能なデバイスでのみ*/
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
     background: var(--button-primary-hover);
@@ -123,7 +84,8 @@ a.secondary {
   }
 }
 
-@media (prefers-color-scheme: dark) {
+/*ダークモード*/
+/* @media (prefers-color-scheme: dark) {
   .logo {
     filter: invert();
   }
@@ -139,4 +101,4 @@ a.secondary {
     --button-secondary-hover: #1a1a1a;
     --button-secondary-border: #1a1a1a;
   }
-}
+} */

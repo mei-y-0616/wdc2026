@@ -1,0 +1,17 @@
+.link{
+    text-decoration: underline;
+}
+
+.isSelected{
+    background-color: blue;
+    color:#fff;
+    font-weight: bold;
+}
+
+.buttonList{
+    display: flex;
+    gap: 5px;
+}
+.buttonList button{
+    padding: 1px 3px;
+}

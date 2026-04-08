@@ -1,0 +1,15 @@
+.pager{
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.pager li{
+    padding: 1px 3px;
+}
+
+.currentPage{
+    background-color: rgb(49, 49, 180);
+    color:#fff;
+    font-weight: bold;
+}
