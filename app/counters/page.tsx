@@ -48,6 +48,7 @@ export default function Counters() {
   }
 
   async function fetchDataCounter() {
+    console.log("fetchDataCounter")
     const res = await fetch("/api/prisma/search-counter-data", {
       method: "POST",
       headers: {
@@ -65,6 +66,8 @@ export default function Counters() {
   }
 
   useEffect(() => {
+    console.log("page:"+page)
+    console.log("use effect areas,services")
     async function fetchDataNum() {
       const res = await fetch("/api/prisma/search-counter-num", {
         method: "POST",
@@ -88,6 +91,7 @@ export default function Counters() {
   }, [areas, services]);
 
   useEffect(() => {
+    console.log("use effect page")
     fetchDataCounter();
   }, [page]);
 
