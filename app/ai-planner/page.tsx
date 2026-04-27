@@ -2,25 +2,23 @@
 import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import ReactMarkdown from "react-markdown";
-import {
-  AdvancedMarker,
-  APIProvider,
-  Map,
-  Pin,
-} from "@vis.gl/react-google-maps";
 import "dotenv/config";
 import type { counter } from "@/app/generated/prisma/client";
+import CounterMap from "@/components/CounterMap/CounterMap";
 
 
 export default function AiPlanner() {
   //トップレベルに書く
   const [prompt, setPrompt] = useState("");
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState<string|null>();
   const [countersId, setCountersId] = useState<number[]>([]);
   const [countersData, setCountersData] = useState<Array<counter>>([]);
 
   async function handleSubmit(e: any) {
     e.preventDefault();
+
+    setResponse(null);
+    setCountersData([])
 
     const res = await fetch("/api/ai", {
       method: "POST",
@@ -56,40 +54,8 @@ export default function AiPlanner() {
       }
     }
     fetchCounter(countersId);
-  //   async function fetchCounters() {
-  //     const counters = await counterFindMany({ id: { in: countersId } });
-  //     if(counters!==null){
-  //       setCountersData(counters);
-  //     }
-  //   }
-  //   fetchCounters();
   }, [countersId]);
 
-  //maps javascript api
-
-  const Markers = (props: { pois: Array<counter> }) => {
-    return (
-      <>
-        {props.pois.map((poi) => {
-          if (!poi.latitude || !poi.longitude) return null;
-          const location = {
-            lat: Number(poi.latitude),
-            lng: Number(poi.longitude),
-          };
-          console.log(location);
-          return (
-            <AdvancedMarker key={poi.id} position={location}>
-              <Pin
-                background={"#FBBC04"}
-                glyphColor={"#000"}
-                borderColor={"#000"}
-              />
-            </AdvancedMarker>
-          );
-        })}
-      </>
-    );
-  };
 
   return (
     <>
@@ -104,30 +70,17 @@ export default function AiPlanner() {
             AIに質問する
           </button>
         </form>
-        <div className={styles.response}>
+        {response&&<div className={styles.response}>
           <h3>AIからの回答</h3>
           <ReactMarkdown>{response}</ReactMarkdown>
-        </div>
-        <ul>
+        </div>}
+        {countersData.length>0&&<ul>
           {countersData.map((counter) => {
             return <li key={counter.id}>{counter.counter_name_ja}</li>;
           })}
-        </ul>
+        </ul>}
 
-        <APIProvider
-          apiKey={process.env.NEXT_PUBLIC_GCP_API_KEY || ""}
-          onLoad={() => console.log("Maps API has loaded.")}
-        >
-          <div className={styles.map}>
-            <Map
-              defaultZoom={4.2}
-              defaultCenter={{ lat: 36, lng: 138 }}
-              mapId="aedb8120b0aa062b539f703f"
-            >
-              <Markers pois={countersData} />
-            </Map>
-          </div>
-        </APIProvider>
+          {countersData.length>0&&<CounterMap counters={countersData}></CounterMap>}
       </div>
     </>
   );

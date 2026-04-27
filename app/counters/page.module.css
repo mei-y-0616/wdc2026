@@ -1,17 +1,28 @@
-.link{
+.link {
     text-decoration: underline;
 }
 
-.isSelected{
+.isSelected {
     background-color: blue;
-    color:#fff;
+    color: #fff;
     font-weight: bold;
 }
 
-.buttonList{
+.buttonList {
     display: flex;
     gap: 5px;
 }
-.buttonList button{
+
+.buttonList button {
     padding: 1px 3px;
+}
+
+.switchDisplay {
+    display: flex;
+}
+
+.counter {
+    padding: 5px 10px;
+    background-color: #f3f3f3;
+    margin-bottom: 5px;
 }
