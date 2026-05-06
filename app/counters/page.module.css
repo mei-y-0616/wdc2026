@@ -1,28 +1,506 @@
-.link {
-    text-decoration: underline;
-}
-
-.isSelected {
-    background-color: blue;
-    color: #fff;
-    font-weight: bold;
-}
-
-.buttonList {
-    display: flex;
-    gap: 5px;
-}
-
-.buttonList button {
-    padding: 1px 3px;
-}
-
-.switchDisplay {
-    display: flex;
+/*counter*/
+.counterList {
+    margin-bottom: 40px;
 }
 
 .counter {
-    padding: 5px 10px;
-    background-color: #f3f3f3;
-    margin-bottom: 5px;
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.counter:not(:last-child) {
+    margin-bottom: 35px;
+
+}
+
+.counterHead {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.counterHeadRight {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.counterHeadRightSp {
+    display: none;
+}
+
+.counterName {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.counterTag {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.counterTag span {
+    display: block;
+    border-radius: 5px;
+    padding: 3px 10px 3px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.counterTagArea {
+    background-color: var(--accent2);
+}
+
+.counterTagService {
+    background-color: var(--accent1);
+    color: var(--white);
+}
+
+.counterMapLink {
+    display: block;
+    background-color: var(--main);
+    width: 67px;
+    height: 67px;
+    border-radius: 100px;
+}
+
+.counterMapLinkIcon {
+    display: grid;
+    height: 100%;
+    place-items: center;
+}
+
+.counterMapLinkIcon img {
+    display: block;
+}
+
+.counterBottom {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 40px;
+    padding-top: 20px;
+}
+
+.counterDetailItem {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.counterRunTime {
+    width: 100%;
+    display: flex;
+    gap: 25px;
+
+}
+
+.counterRunTime>div {
+    max-width: calc((100% - 25px)/2);
+}
+
+.counterRunTimeItem {
+    display: flex;
+    margin-bottom: 2px;
+}
+
+.counterRunTime dt {
+    flex-shrink: 0;
+}
+
+
+/***/
+
+
+
+.switchDisplay {
+    display: flex;
+    background-color: var(--light-main);
+    border-radius: 10px;
+    width: fit-content;
+    margin: 0 auto 50px;
+    padding: 10px;
+}
+
+.switchDisplay button {
+    background-color: var(--light-main);
+    display: block;
+    border: none;
+    padding: 8px 38px;
+    border-radius: 8px;
+    color: #F3F3F3;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.switchDisplay .activeDisplay {
+    background-color: #F3F3F3;
+    color: var(--font);
+}
+
+
+
+/*------*/
+/* SearchText */
+.searchText {
+    margin-bottom: 15px;
+}
+
+.searchText h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.searchBoxArea {
+    background-color: var(--white);
+    padding: 15px 20px;
+    border-radius: 25px;
+    display: flex;
+    column-gap: 18px;
+}
+
+.searchBoxArea input {
+    font-size: 0.875rem;
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--font);
+    background-color: #F3F3F3;
+    padding: 14px 20px;
+}
+
+.searchBoxArea button {
+    display: block;
+    padding: 12px 60px;
+    background-color: var(--accent1);
+    border-radius: 10px;
+    flex-shrink: 0;
+    border: none;
+
+    color: var(--white);
+    font-weight: 500;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+
+    transition: background-color 0.2s;
+}
+
+.searchBoxArea button:hover {
+    background-color: var(--accent1-dark);
+}
+
+/*SearchResult*/
+.searchResult {
+    font-size: 0.875rem;
+    margin-bottom: 35px;
+}
+
+.searchResultStrong {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.searchTag {
+    padding: 25px 20px;
+    background-color: var(--white);
+    border-radius: 20px;
+    width: 270px;
+
+    flex-shrink: 0;
+}
+
+.searchTagSpBtn {
+    display: none;
+}
+
+/*SearchTag*/
+.searchTagTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.searchTagTitleSub {
+    display: flex;
+    column-gap: 3px;
+
+    align-items: center;
+    margin-bottom: 15px;
+
+    padding-top: 18px;
+}
+
+.searchTagTitleSub:not(:first-of-type) {
+    border-top: 1px solid #D9D9D9;
+}
+
+.searchTagTitleSub h4 {
+    font-weight: 500;
+    font-size: 0.875rem;
+
+}
+
+
+.buttonList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.buttonList:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+
+.fromArea button {
+    background-color: var(--accent2);
+    border: none;
+}
+
+.fromArea button.isSelectedTag {
+    outline: 2px solid var(--accent2);
+    background-color: var(--white);
+}
+
+.fromService button {
+    background-color: var(--accent1);
+    border: none;
+    color: var(--white);
+}
+
+.fromService button.isSelectedTag {
+    outline: 2px solid var(--accent1);
+    background-color: var(--white);
+    color: var(--font);
+}
+
+
+.buttonList button {
+    font-weight: 500;
+    border-radius: 5px;
+    display: block;
+    padding: 3px 10px 3px;
+    font-size: 0.875rem;
+}
+
+/*横並び*/
+.searchTagAndCounters {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 25px;
+    overflow: visible;
+}
+
+/*Pager*/
+.pager {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 3px;
+    row-gap: 5px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pager button,
+.isSelectedPage,
+.pagerInactive {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 500;
+    vertical-align: middle;
+    display: grid;
+    place-items: center;
+}
+
+.pager button {
+    width: 40px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+}
+
+.isSelectedPage {
+    width: 40px;
+    height: 40px;
+    background-color: var(--light-main);
+    border-radius: 100px;
+    color: var(--white);
+}
+
+.pagerInactive {
+    width: 40px;
+    height: 30px;
+    color: #999999
+}
+
+
+
+@media screen and (max-width:834px) {
+
+    /* SearchText */
+    .searchText h3 {
+        font-size: 1.5rem;
+    }
+
+    .searchBoxArea button {
+        padding: 15px;
+    }
+
+    .searchBoxArea button span {
+        display: none;
+    }
+
+    /*SearchTag*/
+
+    .searchTagWrapper {
+        position: fixed;
+        height: auto;
+        top: auto;
+        bottom: 20px;
+        right: var(--side-margin);
+        max-width: calc(100vw - var(--side-margin)*2);
+        width: 350px;
+    }
+
+
+
+    .searchTag {
+        display: none;
+        height: auto;
+        width: 100%;
+        /* position: fixed; */
+    }
+
+    .searchTagTitleSub h4 {
+        font-size: 1rem;
+    }
+
+    .buttonList button {
+        font-size: 1rem;
+    }
+
+    .searchTagIsOpen .searchTag {
+        display: block;
+        border: 2px solid var(--light-main);
+        z-index: 50;
+    }
+
+    .searchTagSpBtn {
+        display: block;
+        position: fixed;
+        bottom: 20px;
+        right: var(--side-margin);
+        padding: 14px;
+        aspect-ratio: 1/1;
+        border-radius: 100px;
+        border: none;
+        z-index: 100;
+        background-color: var(--accent2);
+    }
+
+    .searchTagIsOpen .searchTagSpBtn::before,
+    .searchTagIsOpen .searchTagSpBtn::after {
+        position: absolute;
+        content: "";
+        width: 20px;
+        height: 5px;
+        background-color: var(--font);
+        border-radius: 10px;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+
+    }
+
+    .searchTagSpBtn::before {
+        rotate: 45deg;
+    }
+
+    .searchTagSpBtn::after {
+        rotate: -45deg;
+    }
+
+    .searchTagIsOpen .searchTagSpBtn {
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        bottom: auto;
+        position: absolute;
+        top: -24px;
+        right: 14px;
+        background-color: var(--white);
+        border: 2px solid var(--font);
+    }
+
+    .searchTagIsOpen .searchTagSpBtn .searchSortImg {
+        display: none;
+    }
+
+    .searchSortImg {
+        position: relative;
+        width: 56px;
+        height: 47px;
+    }
+
+    /*SearchResult*/
+    .searchResult {
+        text-align: right;
+    }
+
+    /*SwitchDisplay*/
+    .switchDisplay {
+        margin-bottom: 30px;
+    }
+
+    .switchDisplay button {
+        font-size: 0.9375rem;
+        padding: 8px 28px;
+    }
+
+    /*counter*/
+    .counter {
+        padding: 30px 20px;
+    }
+
+    .counterHeadRight {
+        display: none;
+    }
+
+    .counterHeadRightSp {
+        display: block;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .counterMapLink {
+        flex-shrink: 0;
+    }
+
+    .counterName {
+        margin-bottom: 18px;
+    }
+
+    .counterTag {
+        gap: 10px;
+    }
+
+    .counterBottom {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
 }

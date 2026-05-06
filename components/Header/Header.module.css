@@ -1,33 +1,58 @@
 .header {
-    padding: 20px 0;
-    background-color: rgb(224, 224, 224);
     position: fixed;
     width: 100%;
 }
 
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 var(--side-padding);
-
-
+.headerPc {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 23px 0 0;
+}
+
+.headerSp {
+    display: none;
+}
+
+.logo {
+    width: 50px;
+}
+
+.drawerSp{
+    display: none;
+}
+
+
+
+.nav {
+    background-color: var(--white);
+    padding: 12px 32px;
+    border-radius: 10px;
+}
+
+
+.navList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 48px;
 }
 
 .nav ul li a {
+    display: block;
     position: relative;
+    font-size: 0.9375rem;
+    font-weight: bold;
 }
 
-.nav ul li a::before {
+.nav ul li a:not(.navListContact)::before {
     position: absolute;
     content: "";
     bottom: 0;
     left: 0;
-    height: 2px;
+    height: 1px;
     width: 100%;
-    background-color: blue;
+    background-color: var(--font);
     border-radius: 2px;
     scale: 0;
     transform-origin: center left;
@@ -39,7 +64,112 @@
     text-decoration: underline;
 }
 
-.navList{
-    display: flex;
-    gap: 10px;
+
+.navListContact {
+    padding: 8px 15px;
+    background-color: var(--font);
+    color: var(--background);
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-weight: 500 !important;
+}
+
+.navListContact:hover {
+    outline: 1px solid var(--font);
+    background-color: var(--white);
+    color: var(--font);
+}
+
+
+
+@media screen and (max-width:768px) {
+    .headerPc {
+        display: none;
+    }
+
+    .headerSp {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 8px;
+    }
+
+    .hbButtonWrapper {
+        padding: 10px;
+        background-color: var(--white);
+        display: inline-block;
+        border-radius: 8px;
+    }
+
+    .hbButton {
+        background-color: var(--font);
+        height: 33px;
+        width: 33px;
+        border-radius: 5px;
+        border: none;
+        position: relative;
+        display: block;
+        z-index: 100;
+    }
+
+    .hbButton::before,
+    .hbButton::after {
+        position: absolute;
+        content: "";
+        background-color: var(--white);
+        height: 2px;
+        width: 15px;
+        left: 50%;
+        transform-origin: center;
+        transition: all 0.2s;
+    }
+
+    .hbButton::before {
+        top: 11px;
+        translate: -50% 0;
+    }
+
+    .hbButton::after {
+        bottom: 11px;
+        translate: -50% 0;
+    }
+
+    .header.isActive .hbButton::before {
+        rotate: 45deg;
+        top: 50%;
+        translate: -50% -50%;
+    }
+
+    .header.isActive .hbButton::after {
+        rotate: -45deg;
+        top: 50%;
+        translate: -50% -50%;
+    }
+
+    .drawerSp {
+        display: block;
+        position: absolute;
+        translate: 100vw 0;
+        transition: all 0.3s;
+        width: fit-content;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        background-color: var(--white);
+
+        padding: 80px 20px 10px;
+        border-radius: 15px 0 0 15px;
+    }
+
+    .header.isActive .drawerSp {
+        translate: 0 0;
+    }
+
+    .drawerListSp {
+        font-weight: bold;
+        font-size: 0.9875rem;
+    }
+    .drawerListSp li:not(:last-child){
+        margin-bottom: 10px;
+    }
 }

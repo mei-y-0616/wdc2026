@@ -1,0 +1,27 @@
+.breadCrumb {
+    font-size: 0.875rem;
+
+}
+
+.breadCrumbList {
+    display: flex;
+    justify-content: end;
+    color: #AEAEAE;
+    margin-bottom: 25px;
+}
+
+.currentPage {
+    font-weight: 700;
+    color: var(--font);
+}
+
+.breadCrumb li:not(:last-child)::after {
+    content: "-";
+    margin: 0 6px 0;
+}
+
+@media screen and (max-width:768px){
+    .breadCrumb{
+        margin-bottom: 18px;
+    }
+}

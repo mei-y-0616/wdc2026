@@ -1,4 +1,11 @@
-.map{
+.map {
   width: 100%;
-  height: 300px;
+  aspect-ratio: 8/5;
+  max-height: 100vh;
+}
+
+@media screen and (max-width:768px) {
+  .map {
+    aspect-ratio: 3/5;
+  }
 }

@@ -1,0 +1,29 @@
+.pageTitle{
+    border-bottom: 1px solid #D9D9D9;
+    margin-bottom: 55px;
+}
+.titleEn {
+    font-weight: 900;
+    color: #808080;
+    margin-bottom: 5px;
+}
+
+.titleEnMark {
+    color: var(--main);
+}
+.titleJa{
+    font-size: 3rem;
+    margin-bottom: 25px;
+    font-weight: 900;
+    color:var(--main)
+}
+
+@media screen and (max-width:768px){
+    .titleJa{
+        font-size: 2.25rem;
+        margin-bottom: 40px;
+    }
+    .breadCrumb{
+        margin-bottom: 18px;
+    }
+}

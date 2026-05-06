@@ -3,11 +3,14 @@
   --main: #096148;
   --light-main: #00896C;
   --accent1: #005CAF;
+  --accent1-dark: #00396C;
   --accent2: #FAD689;
   --font: #1B1A19;
   --background: #F3F3F3;
-  --white:#fff;
+  --white: #fff;
   --side-margin: 16px;
+
+  --max-width: 1200px;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -25,11 +28,18 @@ body {
 }
 
 body {
-  color: var(--foreground);
+  color: var(--font);
   background: var(--background);
   /* font-family: Arial, Helvetica, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  line-height: 1.5;
+
+}
+
+* {
+  font-family: "Zen Kaku Gothic New", sans-serif;
 }
 
 .main {
@@ -37,16 +47,27 @@ body {
 }
 
 .wrapper {
-  max-width: calc(1200px + var(--side-margin)*2);
+  max-width: calc(var(--max-width) + var(--side-margin)*2);
   padding: 0 var(--side-margin);
   margin: 0 auto;
 }
-.container{
-  --container-gap:50px;
-  padding: 0 var(--container-gap);
+
+.container {
+  --container-gap: 50px;
+  max-width: calc(var(--max-width) - var(--container-gap)*2 + var(--side-margin)*2);
+  margin: 0 auto;
+  padding: 0 var(--side-margin);
 }
-.inner{
-  padding:0 var(--container-gap);
+
+.inner {
+  --inner-gap: 50px;
+  max-width: calc(var(--max-width) - var(--container-gap)*2 - var(--inner-gap)*2 + var(--side-margin)*2);
+  margin: 0 auto;
+  padding: 0 var(--side-margin);
+}
+
+.note{
+  color:#6D6D6D;
 }
 
 * {
@@ -54,6 +75,15 @@ body {
   margin: 0;
 }
 
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+button{
+  cursor: pointer;
+}
 /* img {
   vertical-align: bottom;
 } */

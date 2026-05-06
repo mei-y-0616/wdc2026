@@ -23,7 +23,7 @@ model counter {
   counter_name_ja String? @map("カウンター名称（日本語）")
   counter_name_en String? @map("カウンター名称（英語）")
   zip_code Int? @map("カウンター住所_郵便番号")
-  pref_code Int? @map("カウンター住所_都道府県コード")
+  pref_code Int @map("カウンター住所_都道府県コード")
   city_code Int? @map("カウンター住所_市町村コード")
   address_ja String? @map("カウンター住所_大字丁目・番地等（日本語）")
   address_en String? @map("カウンター住所_大字丁目・番地等（英語）")
