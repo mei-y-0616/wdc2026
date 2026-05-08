@@ -1,42 +1,170 @@
-
-
-
-.form {
-  margin-bottom: 30px;
+.formArea {
+  padding: 60px;
+  background-color: var(--white);
+  border-radius: 15px;
+  margin-bottom: 80px;
 }
 
 .promptInput {
-  display: block;
+  border-radius: 5px;
+  background-color: var(--background);
+  border: none;
   width: 100%;
-  max-width: 500px;
-  height: 4rem;
-  padding: 10px;
+  height: 250px;
+  resize: none;
+  padding: 15px 20px;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 30px;
+}
+
+.promptLabel {
+  font-weight: 700;
+  font-size: 1.25rem;
   margin-bottom: 10px;
+  display: block;
 }
 
 .submitButton {
-  padding: 15px 60px;
+  background-color: var(--accent1);
+  border: none;
+  font-size: 1.125rem;
+  color: var(--white);
+  font-weight: 500;
+  padding: 12px 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-radius: 5px;
+  transition: all 0.2s;
+  margin: 0 auto;
 }
 
-.response {
-  padding: 10px 30px;
-  border-radius: 4px;
-  border: 1px solid var(--foreground);
+.submitButton:hover {
+  background-color: #00396C;
 }
 
-.response>* {
+.submitIcon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.submitIcon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/*response*/
+.responseTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.responseTitleIcon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.responseTitleIcon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.responseTextAndCounters{
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.responseText{
+  padding: 25px 20px;
+  background-color: var(--white);
+  border-radius: 5px;
+  width: 40%;
+  flex-shrink: 0;
+}
+
+.responseText *{
+  margin-bottom: 4px;
+}
+.responseText>*{
   margin-bottom: 10px;
 }
-
-.response ul {
-  list-style: disc inside;
+.counterListAreaTitle{
+  display: none;
+}
+.counterList li{
+  background-color: var(--white);
+  border-radius: 15px;
+padding: 30px;
+}
+.counterList li:not(:last-child){
+  margin-bottom: 15px;
+}
+.counterHead{
+  padding-bottom: 20px;
+  border-bottom: 1px solid #D9D9D9;
+}
+.counterName{
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+.counterTagList{
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.counterBottom{
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.counterBottom>*{
+  align-self: flex-start;
+}
+.counterBottom>*:last-child{
+  align-self: flex-end;
 }
 
-.response ol {
-  list-style: decimal inside;
-}
 
-.map{
-  width: 100%;
-  height: 300px;
+
+@media screen and (max-width:768px){
+  .formArea{
+    padding: 20px;
+  }
+  .promptLabel{
+    font-size: 1.125rem;
+  }
+  .submitButton{
+    font-size: 1rem;
+  }
+  .responseTextAndCounters{
+    flex-direction: column;
+    gap: 35px;
+    margin-bottom: 30px;
+  }
+  .responseTitle{
+    margin-bottom: 20px;
+  }
+  .responseText{
+    width: 100%;
+  }
+  .response{
+    padding: 0;
+  }
+  .counterListAreaTitle{
+    display: block;
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  }
+
+  .counterList li{
+    padding: 20px;
+  }
 }

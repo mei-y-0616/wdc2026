@@ -11,11 +11,14 @@ import {
   Pin,
   useAdvancedMarkerRef,
 } from "@vis.gl/react-google-maps";
+import LinkButton from "../LinkButton/LinkButton";
 
 const CounterMap = memo(function CounterMap({
   counters,
+  link=true,
 }: {
   counters: Array<counter>;
+  link:boolean
 }) {
   const Markers = (props: { pois: Array<counter> }) => {
     return (
@@ -52,10 +55,10 @@ const CounterMap = memo(function CounterMap({
                 <InfoWindow
                   anchor={marker}
                   position={location}
-                  headerContent={<p>{poi.counter_name_ja}</p>}
+                  headerContent={<p className={styles.counterName}>{poi.counter_name_ja}</p>}
                   onClose={handleClose}
                 >
-                  <Link href={`/counters/${poi.id}`}>詳しく見る</Link>
+                  {link&&<LinkButton path={`/counters/${poi.id}`} msg="カウンターの詳細へ"/>}
                 </InfoWindow>
               )}
             </AdvancedMarker>

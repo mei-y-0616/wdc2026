@@ -1,0 +1,29 @@
+.counterTag {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.counterTag span {
+    display: block;
+    border-radius: 5px;
+    padding: 3px 10px 3px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.counterTagArea {
+    background-color: var(--accent2);
+}
+
+.counterTagService {
+    background-color: var(--accent1);
+    color: var(--white);
+}
+
+@media screen and (max-width:768px) {
+    .counterTag {
+        gap: 10px;
+    }
+}

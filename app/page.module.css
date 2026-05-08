@@ -1,5 +1,6 @@
-
-
+.main {
+  padding-top: 130px;
+}
 
 
 
@@ -16,20 +17,11 @@
   }
 } */
 
-@media (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .main {
-    padding: 48px 24px;
+    padding-top: 100px;
   }
 
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
 }
 
 /*ダークモード*/

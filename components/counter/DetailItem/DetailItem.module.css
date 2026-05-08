@@ -1,0 +1,17 @@
+.counterDetailItem {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.img {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

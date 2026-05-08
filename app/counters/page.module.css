@@ -40,29 +40,11 @@
     margin-bottom: 12px;
 }
 
-.counterTag {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    flex-wrap: wrap;
-}
 
-.counterTag span {
-    display: block;
-    border-radius: 5px;
-    padding: 3px 10px 3px;
-    font-size: 0.875rem;
-    font-weight: 500;
-}
 
-.counterTagArea {
-    background-color: var(--accent2);
-}
 
-.counterTagService {
-    background-color: var(--accent1);
-    color: var(--white);
-}
+
+
 
 .counterMapLink {
     display: block;
@@ -89,31 +71,9 @@
     padding-top: 20px;
 }
 
-.counterDetailItem {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-}
 
-.counterRunTime {
-    width: 100%;
-    display: flex;
-    gap: 25px;
 
-}
 
-.counterRunTime>div {
-    max-width: calc((100% - 25px)/2);
-}
-
-.counterRunTimeItem {
-    display: flex;
-    margin-bottom: 2px;
-}
-
-.counterRunTime dt {
-    flex-shrink: 0;
-}
 
 
 /***/
@@ -343,6 +303,11 @@
     height: 30px;
     color: #999999
 }
+.counterMap{
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+}
 
 
 
@@ -493,9 +458,7 @@
         margin-bottom: 18px;
     }
 
-    .counterTag {
-        gap: 10px;
-    }
+
 
     .counterBottom {
         grid-template-columns: repeat(1, 1fr);

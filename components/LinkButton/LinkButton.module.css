@@ -21,7 +21,7 @@
     flex-shrink: 0;
 }
 .LinkButton span img{
-    width: 12px;
+    /* width: 12px; */
 }
 .LinkButton:hover{
     background-color: var(--accent1-dark);

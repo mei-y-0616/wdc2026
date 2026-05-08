@@ -19,6 +19,9 @@
 }
 
 @media screen and (max-width:768px){
+    .inner{
+        padding: 0;
+    }
     .titleJa{
         font-size: 2.25rem;
         margin-bottom: 40px;

@@ -8,6 +8,7 @@
     justify-content: end;
     color: #AEAEAE;
     margin-bottom: 25px;
+    flex-wrap: wrap;
 }
 
 .currentPage {

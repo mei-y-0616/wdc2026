@@ -1,9 +1,23 @@
+
 .map {
   width: 100%;
   aspect-ratio: 8/5;
   max-height: 100vh;
-}
 
+}
+.counterName{
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.counterLink{
+  text-align: right;
+  width: 100%;
+  display: block;
+  padding-right: 48px;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
 @media screen and (max-width:768px) {
   .map {
     aspect-ratio: 3/5;

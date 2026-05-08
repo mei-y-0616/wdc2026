@@ -2,6 +2,7 @@ import { Zen_Kaku_Gothic_New } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import styles from "./page.module.css";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -28,7 +29,7 @@ export default function RootLayout({ children }:{children:any}) {
       {/* <body className={`${geistSans.variable} ${geistMono.variable}`}> */}
       <body className={zenKakuGothicNew.className}>
         <Header></Header>
-        <main className="main">
+        <main className={styles.main}>
           {children}
         </main>
         <Footer></Footer>

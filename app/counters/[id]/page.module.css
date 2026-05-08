@@ -1,4 +1,250 @@
-.map{
+.counter {
+  background-color: var(--white);
+  padding: 30px 25px 40px;
+  border-radius: 20px;
+}
+
+.counterHead {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.counterName {
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+}
+
+.counterData {
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.counterDetail {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  /* gap: 30px; */
+}
+
+.counterDetailLeft,
+.counterDetailRight {
+  width: 46%;
+}
+
+.counterDetailLeft>*,
+.counterDetailRight>* {
+  margin-bottom: 18px;
+
+}
+
+.counterMap {
+  width: 35%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.serviceArea {
+  padding-top: 25px;
+  margin-bottom: 60px;
+}
+
+.serviceAreaTitle {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  font-weight: 900;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.serviceBlock {
+  background-color: var(--background);
+  border-radius: 10px;
+  padding: 25px;
+}
+
+.serviceBlockHead {
+  font-weight: 900;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #5E5E5E;
+  margin-bottom: 10px;
+}
+
+.serviceName {
+  font-size: 1.5rem;
+}
+
+.servicePrice {
+  font-size: 1.5rem;
+}
+
+.price {
+  font-size: 2rem;
+}
+
+/*serviceTable*/
+.serviceTable {
   width: 100%;
-  height: 300px;
+  /* border-collapse: collapse; */
+  border-spacing: 0 8px;
+}
+
+
+.serviceTable th {
+  background-color: var(--light-main);
+  border-radius: 5px 0 0 5px;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 25px;
+  text-wrap: nowrap
+}
+
+.serviceTable td {
+  padding: 12px;
+  border-radius: 0 5px 5px 0;
+  background-color: var(--white);
+}
+
+.serviceItem {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.serviceItem:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.serviceItem span {
+  background-color: var(--accent2);
+  border-radius: 5px;
+  padding: 3px 8px 2px;
+  display: block;
+  font-weight: 500;
+}
+
+.serviceDetail {
+  font-size: 1rem;
+
+}
+
+.serviceDetail:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.serviceDetail p {
+  margin-bottom: 3px;
+}
+
+.serviceNote {
+  color: #6D6D6D;
+  font-size: 0.875rem;
+}
+
+.linkButtonArea {
+  display: grid;
+  place-items: center;
+}
+
+
+@media screen and (max-width:834px) {
+  .counterWrapper {
+    padding: 0;
+  }
+
+  .counter {
+    padding: 30px 18px 40px;
+  }
+
+  .counterName {
+    margin-bottom: 18px;
+  }
+
+  .counterData {
+    flex-direction: column;
+    padding-bottom: 40px;
+  }
+
+  .counterDetail {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .counterDetailLeft,
+  .counterDetailRight {
+    width: 100%;
+  }
+
+  .counterDetailLeft>*,
+  .counterDetailRight>* {
+    margin-bottom: 15px;
+  }
+
+  .counterMap {
+    width: 100%;
+  }
+
+  .serviceArea {
+    padding-top: 40px;
+    margin-bottom: 50px;
+  }
+
+  .serviceAreaTitle {
+    margin-bottom: 30px;
+  }
+
+  .serviceGrid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+  }
+
+  .serviceBlock {
+    padding: 24px 18px;
+  }
+
+  .serviceBlockHead {
+    margin-bottom: 24px;
+  }
+  .serviceName{
+    font-size: 1.25rem;
+  }
+  .servicePrice{
+    font-size:1.25rem;
+  }
+  .price{
+    font-size: 1.5rem;
+  }
+  .serviceTable {
+    border-spacing: 0;
+  }
+
+  .serviceTable tr {
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .serviceTable tr:not(:last-child) {
+    margin-bottom: 18px;
+  }
+
+  .serviceTable th {
+    padding: 15px;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .serviceTable td {
+    border-radius: 0 0 5px 5px;
+  }
 }

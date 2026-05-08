@@ -1,0 +1,19 @@
+.counterRunTime {
+    width: 100%;
+    display: flex;
+    gap: 25px;
+
+}
+
+.counterRunTime>div {
+    max-width: calc((100% - 25px)/2);
+}
+
+.counterRunTimeItem {
+    display: flex;
+    margin-bottom: 2px;
+}
+
+.counterRunTime dt {
+    flex-shrink: 0;
+}

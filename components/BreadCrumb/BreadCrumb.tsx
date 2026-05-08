@@ -11,7 +11,7 @@ const pathAltName: Record<string, string> = {
   "ai-planner": "AIプランナー",
 };
 
-export default function BreadCrumb() {
+export default function BreadCrumb({ pageName }: { pageName?: string }) {
   const pathname = usePathname();
   // pathを「/」で分解
   const paths = pathname.substring(1).split("/");
@@ -26,7 +26,7 @@ export default function BreadCrumb() {
         <li>
           <Link href="/">TOP</Link>
         </li>
-        
+
         {paths.map((child, index) => (
           <li key={index}>
             <Link
@@ -35,7 +35,7 @@ export default function BreadCrumb() {
                 index === paths.length - 1 ? `${styles.currentPage}` : ""
               }
             >
-              {pathAltName[child] ? pathAltName[child] : child}
+              { pathAltName[child]??pageName ?? child}
             </Link>
           </li>
         ))}

@@ -9,7 +9,14 @@ import { Prisma } from "@/app/generated/prisma/client";
 import CounterMap from "@/components/CounterMap/CounterMap";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import LinkButton from "@/components/LinkButton/LinkButton";
-import { parsePhoneNumberWithError } from "libphonenumber-js";
+import {
+  getPrefName,
+  getParsePhone,
+  getLanguage,
+} from "@/utils/counter/counterFuns";
+import TagList from "@/components/counter/TagList/TagList";
+import RunTime from "@/components/counter/RunTime/RunTime";
+import DetailItem from "@/components/counter/DetailItem/DetailItem";
 
 const serviceObj: Record<string, string> = {
   has_storage: "一時預かり",
@@ -462,222 +469,18 @@ export default function Counters() {
     fetchDataCounter();
   }, [page]);
 
-  function getAreaTag(pref_code: number) {
-    const area = Object.values(areaObj).find((area) =>
-      area.prefs.includes(pref_code),
-    );
-    return area?.name;
-  }
-
-  function getServiceTag({
-    has_storage,
-    has_delivery_sameday,
-    has_delivery_standard,
-    has_delivery_overseas,
-  }: any) {
-    const services = [];
-    if (has_storage) {
-      services.push("一時預かり");
-    }
-    if (has_delivery_sameday) {
-      services.push("当日配送");
-    }
-    if (has_delivery_standard) {
-      services.push("一般配送");
-    }
-    if (has_delivery_overseas) {
-      services.push("海外配送");
-    }
-
-    return services;
-  }
-
-  function getParsePhone(phone: string | null) {
-    if (phone !== null) {
-      try {
-        const formatedPhone = parsePhoneNumberWithError(phone, {
-          defaultCountry: "JP",
-        });
-        return formatedPhone.formatNational();
-      } catch (error) {
-        return phone;
-      }
-    } else {
-      return "データなし";
-    }
-  }
-
-  function getRunTime(c: counter) {
-    function judgeRunTime({
-      open,
-      close,
-      is_holiday,
-    }: {
-      open: string | null;
-      close: string | null;
-      is_holiday: number | null;
-    }) {
-      const o = open?.padEnd(3, "0");
-      const c = close?.padEnd(3, "0");
-      if (is_holiday === 1) {
-        return "定休日";
-      } else if (o != null && c != null) {
-        return (
-          o.slice(-4, -2) +
-          ":" +
-          o.slice(-2) +
-          "～" +
-          c.slice(-4, -2) +
-          ":" +
-          c.slice(-2)
-        );
-      } else if (o == null && c != null) {
-        return "---" + "～" + c.slice(-4, -2) + ":" + c.slice(-2);
-      } else if (o != null && c == null) {
-        o.slice(-4, -2) + ":" + o.slice(-2) + "～" + "---";
-      } else {
-        return "---";
-      }
-    }
-
-    return (
-      <dl className={styles.counterRunTime}>
-        <div>
-          <div className={styles.counterRunTimeItem}>
-            <dt>月：</dt>
-            <dd>
-              {judgeRunTime({
-                open: c.mon_open,
-                close: c.mon_close,
-                is_holiday: c.mon_is_holiday,
-              })}
-            </dd>
-          </div>
-
-          <div className={styles.counterRunTimeItem}>
-            <dt>火：</dt>
-            <dd>
-              {judgeRunTime({
-                open: c.tue_open,
-                close: c.tue_close,
-                is_holiday: c.tue_is_holiday,
-              })}
-            </dd>
-          </div>
-
-          <div className={styles.counterRunTimeItem}>
-            <dt>水：</dt>
-            <dd>
-              {judgeRunTime({
-                open: c.wed_open,
-                close: c.wed_close,
-                is_holiday: c.wed_is_holiday,
-              })}
-            </dd>
-          </div>
-
-          <div className={styles.counterRunTimeItem}>
-            <dt>木：</dt>
-            <dd>
-              {judgeRunTime({
-                open: c.thu_open,
-                close: c.thu_close,
-                is_holiday: c.thu_is_holiday,
-              })}
-            </dd>
-          </div>
-        </div>
-
-        <div>
-          <div className={styles.counterRunTimeItem}>
-            <dt>金：</dt>
-            <dd>
-              {judgeRunTime({
-                open: c.fri_open,
-                close: c.fri_close,
-                is_holiday: c.fri_is_holiday,
-              })}
-            </dd>
-          </div>
-
-          <div className={styles.counterRunTimeItem}>
-            <dt>土：</dt>
-            <dd>
-              {judgeRunTime({
-                open: c.sat_open,
-                close: c.sat_close,
-                is_holiday: c.sat_is_holiday,
-              })}
-            </dd>
-          </div>
-
-          <div className={styles.counterRunTimeItem}>
-            <dt>日：</dt>
-            <dd>
-              {judgeRunTime({
-                open: c.sun_open,
-                close: c.sun_close,
-                is_holiday: c.sun_is_holiday,
-              })}
-            </dd>
-          </div>
-          <div className={`note`}>{c.hours_notes_ja}</div>
-        </div>
-      </dl>
-    );
-  }
-
-  function getLanguage(c: counter) {
-    const language = [];
-    if (c.lang_en === 1) {
-      language.push("英語");
-    }
-    if (c.lang_zh_cn === 1) {
-      language.push("中国語(簡体字)");
-    }
-    if (c.lang_zh_tw === 1) {
-      language.push("中国語(繁体字)");
-    }
-    if (c.lang_ko === 1) {
-      language.push("韓国語");
-    }
-    if (c.lang_th === 1) {
-      language.push("タイ語");
-    }
-    const languageStr = language.join("/");
-    if (c.lang_others_ja) {
-      languageStr + c.lang_others_ja;
-    }
-    if (languageStr.length > 0) {
-      return languageStr;
-    } else {
-      return "データなし";
-    }
-  }
-
-  function getPrefName(code: string) {
-    const c = code.padStart(6, "0");
-    const name = prefCodeList[c];
-    if (name) {
-      return name;
-    } else {
-      return "";
-    }
-  }
-
   return (
     <>
-      <div className="container">
-        <PageTitle
-          titleEn="Search"
-          titleJa={
-            <span>
-              手ぶら観光カウンター
-              <span style={{ color: "var(--font)" }}>を探す</span>
-            </span>
-          }
-        ></PageTitle>
-
+      <PageTitle
+        titleEn="Search"
+        titleJa={
+          <span>
+            手ぶら観光カウンター
+            <span style={{ color: "var(--font)" }}>を探す</span>
+          </span>
+        }
+      ></PageTitle>
+      <div className="inner">
         <SearchText
           searchTextTmp={searchTextTmp}
           setSearchTextTmp={setSearchTextTmp}
@@ -718,29 +521,7 @@ export default function Counters() {
                           <h3 className={styles.counterName}>
                             {counter.counter_name_ja}
                           </h3>
-                          <div className={styles.counterTag}>
-                            {
-                              <span className={styles.counterTagArea}>
-                                {getAreaTag(counter.pref_code)}
-                              </span>
-                            }
-                            {getServiceTag({
-                              has_storage: counter.has_storage,
-                              has_delivery_sameday:
-                                counter.has_delivery_sameday,
-                              has_delivery_standard:
-                                counter.has_delivery_standard,
-                              has_delivery_overseas:
-                                counter.has_delivery_overseas,
-                            }).map((service, index) => (
-                              <span
-                                key={index}
-                                className={styles.counterTagService}
-                              >
-                                {service}
-                              </span>
-                            ))}
-                          </div>
+                          <TagList counter={counter} />
                         </div>
                         <div className={styles.counterHeadRight}>
                           <Link
@@ -766,45 +547,33 @@ export default function Counters() {
                         </div>
                       </div>
                       <div className={styles.counterBottom}>
-                        <div className={styles.counterDetailItem}>
-                          <Image
-                            src="/images/icon_map_gray.svg"
-                            width={24}
-                            height={24}
-                            alt=""
-                          ></Image>
-                          <p>
-                            {getPrefName(
-                              String(counter.pref_code) +
-                                String(counter.city_code),
-                            )}
-                            {counter.address_ja}
-                          </p>
-                        </div>
+                        <DetailItem
+                          imageSrc="/images/icon_map_gray.svg"
+                          explain={
+                            <p>
+                              {getPrefName(
+                                String(counter.pref_code) +
+                                  String(counter.city_code),
+                              )}
+                              {counter.address_ja}
+                            </p>
+                          }
+                        />
 
-                        <div className={styles.counterDetailItem}>
-                          <Image
-                            src="/images/icon_phone_gray.svg"
-                            width={24}
-                            height={24}
-                            alt=""
-                          ></Image>
-                          <p>{getParsePhone(counter.phone)}</p>
-                        </div>
+                        <DetailItem
+                          imageSrc="/images/icon_phone_gray.svg"
+                          explain={<p>{getParsePhone(counter.phone)}</p>}
+                        />
 
-                        <div className={styles.counterDetailItem}>
-                          <Image
-                            src="/images/icon_time_gray.svg"
-                            width={24}
-                            height={24}
-                            alt=""
-                          ></Image>
-                          {getRunTime(counter)}
-                        </div>
+                        <DetailItem
+                          imageSrc="/images/icon_time_gray.svg"
+                          explain={<RunTime c={counter} />}
+                        />
 
-                        <div className={styles.counterDetailItem}>
-                          <p>対応言語：{getLanguage(counter)}</p>
-                        </div>
+                        <DetailItem
+                          imageSrc="/images/icon_lang_gray.svg"
+                          explain={<p>対応言語：{getLanguage(counter)}</p>}
+                        />
                       </div>
 
                       <div className={styles.counterHeadRightSp}>
@@ -846,7 +615,9 @@ export default function Counters() {
           )}
 
           {display === "map" && (
-            <CounterMap counters={countersData}></CounterMap>
+            <div className={styles.counterMap}>
+              <CounterMap counters={countersData} link={true}></CounterMap>
+            </div>
           )}
         </div>
       </div>

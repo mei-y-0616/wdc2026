@@ -14,11 +14,10 @@ export default function LinkButton({
       <p>{msg}</p>
       <span>
         <Image
-          src="images/icon_arrow_black.svg"
-          width={0}
-          height={0}
+          src="/images/icon_arrow_black.svg"
+          width={12}
+          height={4}
           sizes="100%"
-          style={{ width: "12px", height: "auto" }}
           alt=""
         ></Image>
       </span>

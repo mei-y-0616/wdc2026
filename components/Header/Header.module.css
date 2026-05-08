@@ -1,6 +1,7 @@
 .header {
     position: fixed;
     width: 100%;
+    z-index: 999;
 }
 
 .headerPc {
@@ -8,6 +9,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 23px 0 0;
+    gap: 15px;
 }
 
 .headerSp {
@@ -16,6 +18,10 @@
 
 .logo {
     width: 50px;
+    line-height: 1px;
+}
+.logo a{
+    display: inline-block;
 }
 
 .drawerSp{
@@ -35,7 +41,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 48px;
+    column-gap: min(48px,3.75vw);
 }
 
 .nav ul li a {
