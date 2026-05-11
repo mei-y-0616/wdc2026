@@ -481,49 +481,103 @@ export default function Counters() {
         }
       ></PageTitle>
       <div className="inner">
-        <SearchText
-          searchTextTmp={searchTextTmp}
-          setSearchTextTmp={setSearchTextTmp}
-          setSearchText={setSearchText}
-        ></SearchText>
+        <section>
+          <SearchText
+            searchTextTmp={searchTextTmp}
+            setSearchTextTmp={setSearchTextTmp}
+            setSearchText={setSearchText}
+          ></SearchText>
 
-        <SearchResult
-          searchText={searchText}
-          areas={areas}
-          services={services}
-          count={count}
-          start={skip}
-          limit={limit}
-          display={display}
-        ></SearchResult>
-
-        <SwitchDisplay
-          display={display}
-          setDisplay={setDisplay}
-        ></SwitchDisplay>
-
-        <div className={styles.searchTagAndCounters}>
-          <SearchTag
+          <SearchResult
+            searchText={searchText}
             areas={areas}
             services={services}
-            onAreasChange={setAreas}
-            onServicesChange={setServices}
-          ></SearchTag>
+            count={count}
+            start={skip}
+            limit={limit}
+            display={display}
+          ></SearchResult>
 
-          {display === "list" && (
-            <div className={styles.countersAndPager}>
-              <ul className={styles.counterList}>
-                {countersData.map((counter) => (
-                  <li key={counter.id} className={styles.counter}>
-                    <article>
-                      <div className={styles.counterHead}>
-                        <div className={styles.counterHeadLeft}>
-                          <h3 className={styles.counterName}>
-                            {counter.counter_name_ja}
-                          </h3>
-                          <TagList counter={counter} />
+          <SwitchDisplay
+            display={display}
+            setDisplay={setDisplay}
+          ></SwitchDisplay>
+
+          <div className={styles.searchTagAndCounters}>
+            <SearchTag
+              areas={areas}
+              services={services}
+              onAreasChange={setAreas}
+              onServicesChange={setServices}
+            ></SearchTag>
+
+            {display === "list" && (
+              <div className={styles.countersAndPager}>
+                <ul className={styles.counterList}>
+                  {countersData.map((counter) => (
+                    <li key={counter.id} className={styles.counter}>
+                      <article>
+                        <div className={styles.counterHead}>
+                          <div className={styles.counterHeadLeft}>
+                            <h3 className={styles.counterName}>
+                              {counter.counter_name_ja}
+                            </h3>
+                            <TagList counter={counter} />
+                          </div>
+                          <div className={styles.counterHeadRight}>
+                            <Link
+                              href={`https://maps.google.com/maps?ll=${counter.latitude},${counter.longitude}&z=17&q=${counter.latitude},${counter.longitude}`}
+                              className={styles.counterMapLink}
+                            >
+                              <div className={styles.counterMapLinkIcon}>
+                                <Image
+                                  src="/images/icon_maplink_white.svg"
+                                  width={0}
+                                  height={0}
+                                  sizes="100%"
+                                  style={{ width: "auto", height: "45px" }}
+                                  alt=""
+                                ></Image>
+                              </div>
+                            </Link>
+
+                            <LinkButton
+                              path={`/counters/${counter.id}`}
+                              msg="カウンターの詳細へ"
+                            ></LinkButton>
+                          </div>
                         </div>
-                        <div className={styles.counterHeadRight}>
+                        <div className={styles.counterBottom}>
+                          <DetailItem
+                            imageSrc="/images/icon_map_gray.svg"
+                            explain={
+                              <p>
+                                {getPrefName(
+                                  String(counter.pref_code) +
+                                    String(counter.city_code),
+                                )}
+                                {counter.address_ja}
+                              </p>
+                            }
+                          />
+
+                          <DetailItem
+                            imageSrc="/images/icon_phone_gray.svg"
+                            explain={<p>{getParsePhone(counter.phone)}</p>}
+                          />
+
+                          <DetailItem
+                            imageSrc="/images/icon_time_gray.svg"
+                            explain={<RunTime c={counter} />}
+                          />
+
+                          <DetailItem
+                            imageSrc="/images/icon_lang_gray.svg"
+                            explain={<p>対応言語：{getLanguage(counter)}</p>}
+                          />
+                        </div>
+
+                        <div className={styles.counterHeadRightSp}>
                           <Link
                             href={`https://maps.google.com/maps?ll=${counter.latitude},${counter.longitude}&z=17&q=${counter.latitude},${counter.longitude}`}
                             className={styles.counterMapLink}
@@ -545,81 +599,29 @@ export default function Counters() {
                             msg="カウンターの詳細へ"
                           ></LinkButton>
                         </div>
-                      </div>
-                      <div className={styles.counterBottom}>
-                        <DetailItem
-                          imageSrc="/images/icon_map_gray.svg"
-                          explain={
-                            <p>
-                              {getPrefName(
-                                String(counter.pref_code) +
-                                  String(counter.city_code),
-                              )}
-                              {counter.address_ja}
-                            </p>
-                          }
-                        />
+                      </article>
+                    </li>
+                  ))}
+                </ul>
 
-                        <DetailItem
-                          imageSrc="/images/icon_phone_gray.svg"
-                          explain={<p>{getParsePhone(counter.phone)}</p>}
-                        />
+                {count > 0 && (
+                  <Pager
+                    count={count}
+                    limit={limit}
+                    page={page}
+                    onPageChange={setPage}
+                  ></Pager>
+                )}
+              </div>
+            )}
 
-                        <DetailItem
-                          imageSrc="/images/icon_time_gray.svg"
-                          explain={<RunTime c={counter} />}
-                        />
-
-                        <DetailItem
-                          imageSrc="/images/icon_lang_gray.svg"
-                          explain={<p>対応言語：{getLanguage(counter)}</p>}
-                        />
-                      </div>
-
-                      <div className={styles.counterHeadRightSp}>
-                        <Link
-                          href={`https://maps.google.com/maps?ll=${counter.latitude},${counter.longitude}&z=17&q=${counter.latitude},${counter.longitude}`}
-                          className={styles.counterMapLink}
-                        >
-                          <div className={styles.counterMapLinkIcon}>
-                            <Image
-                              src="/images/icon_maplink_white.svg"
-                              width={0}
-                              height={0}
-                              sizes="100%"
-                              style={{ width: "auto", height: "45px" }}
-                              alt=""
-                            ></Image>
-                          </div>
-                        </Link>
-
-                        <LinkButton
-                          path={`/counters/${counter.id}`}
-                          msg="カウンターの詳細へ"
-                        ></LinkButton>
-                      </div>
-                    </article>
-                  </li>
-                ))}
-              </ul>
-
-              {count > 0 && (
-                <Pager
-                  count={count}
-                  limit={limit}
-                  page={page}
-                  onPageChange={setPage}
-                ></Pager>
-              )}
-            </div>
-          )}
-
-          {display === "map" && (
-            <div className={styles.counterMap}>
-              <CounterMap counters={countersData} link={true}></CounterMap>
-            </div>
-          )}
-        </div>
+            {display === "map" && (
+              <div className={styles.counterMap}>
+                <CounterMap counters={countersData} link={true}></CounterMap>
+              </div>
+            )}
+          </div>
+        </section>
       </div>
     </>
   );

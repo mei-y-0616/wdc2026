@@ -1,0 +1,30 @@
+.sectTitle{
+    color:var(--font);
+    margin-bottom: 35px;
+}
+.en{
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 1px 20px 5px;
+    background-color: var(--accent2);
+    width: fit-content;
+    margin-bottom: 16px;
+    line-height: 100%;
+}
+.ja{
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+@media screen and (max-width:768px){
+    .sectTitle{
+        margin-bottom: 20px;
+    }
+    .en{
+        margin-bottom: 12px;
+    }
+    .ja{
+        font-size: 2rem;
+    }
+}

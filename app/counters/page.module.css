@@ -170,13 +170,19 @@
     font-weight: 500;
 }
 
+.searchTagWrapper {
+    flex-shrink: 0;
+}
+
 .searchTag {
     padding: 25px 20px;
     background-color: var(--white);
     border-radius: 20px;
     width: 270px;
 
-    flex-shrink: 0;
+
+    position: sticky;
+    top: calc(var(--section-padding) + 20px);
 }
 
 .searchTagSpBtn {
@@ -254,9 +260,8 @@
 /*横並び*/
 .searchTagAndCounters {
     display: flex;
-    align-items: flex-start;
+    /* align-items: flex-start; */
     column-gap: 25px;
-    overflow: visible;
 }
 
 /*Pager*/
@@ -303,7 +308,8 @@
     height: 30px;
     color: #999999
 }
-.counterMap{
+
+.counterMap {
     width: 100%;
     border-radius: 20px;
     overflow: hidden;
@@ -336,6 +342,7 @@
         right: var(--side-margin);
         max-width: calc(100vw - var(--side-margin)*2);
         width: 350px;
+        z-index: 100;
     }
 
 

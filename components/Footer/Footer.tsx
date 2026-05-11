@@ -37,16 +37,16 @@ export default function Footer() {
             </ul>
             <ul>
               <li>
-                <Link href="/contact">よくある質問</Link>
+                <Link href="/contact#faq">よくある質問</Link>
               </li>
               <li>
-                <Link href="/contact">お問い合わせ</Link>
+                <Link href="/contact#contact">お問い合わせ</Link>
               </li>
               <li>
-                <Link href="">利用規約</Link>
+                <Link href="/">利用規約</Link>
               </li>
               <li>
-                <Link href="">プライバシーポリシー</Link>
+                <Link href="/">プライバシーポリシー</Link>
               </li>
             </ul>
           </div>

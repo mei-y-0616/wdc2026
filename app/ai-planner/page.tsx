@@ -73,84 +73,88 @@ export default function AiPlanner() {
     <>
       <PageTitle titleEn="AI Planner" titleJa="AI手ぶら観光プランナー" />
       <div className="container">
-        <form onSubmit={handleSubmit} className={styles.formArea} id="form">
-          <label className={styles.promptLabel} htmlFor="prompt">
-            ここにあなたの旅程を入力
-          </label>
-          <textarea
-            id="prompt"
-            name="prompt"
-            onChange={(e) => setPrompt(e.target.value)}
-            className={styles.promptInput}
-            placeholder="例）○/○の9時に△△空港に到着して、その後□□通りを観光したあと、15時に××ホテルにチェックインします。"
-          ></textarea>
-          <button type="submit" className={styles.submitButton}>
-            AIプランナーに送信
-            <div className={styles.submitIcon}>
-              <Image src="/images/icon_submit_white.svg" fill alt="" />
-            </div>
-          </button>
-        </form>
+        <section>
+          <form onSubmit={handleSubmit} className={styles.formArea} id="form">
+            <label className={styles.promptLabel} htmlFor="prompt">
+              ここにあなたの旅程を入力
+            </label>
+            <textarea
+              id="prompt"
+              name="prompt"
+              onChange={(e) => setPrompt(e.target.value)}
+              className={styles.promptInput}
+              placeholder="例）○/○の9時に△△空港に到着して、その後□□通りを観光したあと、15時に××ホテルにチェックインします。"
+            ></textarea>
+            <button type="submit" className={styles.submitButton}>
+              AIプランナーに送信
+              <div className={styles.submitIcon}>
+                <Image src="/images/icon_submit_white.svg" fill alt="" />
+              </div>
+            </button>
+          </form>
 
-        {response && (
-          <div className={`${styles.response} inner`}>
-            <h3 className={styles.responseTitle}>
-              <div className={styles.responseTitleIcon}>
-                <Image src="/images/icon_checkbox_green.svg" fill alt="" />
-              </div>
-              AIからの回答
-            </h3>
-            <div className={styles.responseTextAndCounters}>
-              <div className={styles.responseText}>
-                <ReactMarkdown>{response}</ReactMarkdown>
-              </div>
-              {countersData.length > 0 && (
-                <div className={styles.counterListArea}>
-                  <h4 className={styles.counterListAreaTitle}>カウンター提案</h4>
-                  <ul className={styles.counterList}>
-                    {countersData.map((c, i) => {
-                      return (
-                        <li key={i}>
-                          <div className={styles.counterHead}>
-                            <h4 className={styles.counterName}>
-                              {c.counter_name_ja}
-                            </h4>
-                            <div className={styles.counterTagList}>
-                              <TagList counter={c} />
+          {response && (
+            <div className={`${styles.response} inner`}>
+              <h3 className={styles.responseTitle}>
+                <div className={styles.responseTitleIcon}>
+                  <Image src="/images/icon_checkbox_green.svg" fill alt="" />
+                </div>
+                AIからの回答
+              </h3>
+              <div className={styles.responseTextAndCounters}>
+                <div className={styles.responseText}>
+                  <ReactMarkdown>{response}</ReactMarkdown>
+                </div>
+                {countersData.length > 0 && (
+                  <div className={styles.counterListArea}>
+                    <h4 className={styles.counterListAreaTitle}>
+                      カウンター提案
+                    </h4>
+                    <ul className={styles.counterList}>
+                      {countersData.map((c, i) => {
+                        return (
+                          <li key={i}>
+                            <div className={styles.counterHead}>
+                              <h4 className={styles.counterName}>
+                                {c.counter_name_ja}
+                              </h4>
+                              <div className={styles.counterTagList}>
+                                <TagList counter={c} />
+                              </div>
                             </div>
-                          </div>
-                          <div className={styles.counterBottom}>
-                            <DetailItem
-                              imageSrc="/images/icon_map_gray.svg"
-                              explain={
-                                <p>
-                                  {getPrefName(
-                                    String(c.pref_code) + String(c.city_code),
-                                  )}
-                                  {c.address_ja}
-                                </p>
-                              }
-                            />
-                            <LinkButton
-                              path={`/counters/${c.id}`}
-                              msg="カウンターの詳細へ"
-                            />
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                            <div className={styles.counterBottom}>
+                              <DetailItem
+                                imageSrc="/images/icon_map_gray.svg"
+                                explain={
+                                  <p>
+                                    {getPrefName(
+                                      String(c.pref_code) + String(c.city_code),
+                                    )}
+                                    {c.address_ja}
+                                  </p>
+                                }
+                              />
+                              <LinkButton
+                                path={`/counters/${c.id}`}
+                                msg="カウンターの詳細へ"
+                              />
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {countersData.length > 0 && (
+                <div className={styles.counterMap}>
+                  <CounterMap counters={countersData} link={true} />
                 </div>
               )}
             </div>
-
-            {countersData.length > 0 && (
-              <div className={styles.counterMap}>
-                <CounterMap counters={countersData} link={true} />
-              </div>
-            )}
-          </div>
-        )}
+          )}
+        </section>
       </div>
     </>
   );

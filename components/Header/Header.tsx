@@ -1,15 +1,14 @@
-"use client"
+"use client";
 import Link from "next/link";
 import styles from "./Header.module.css";
 import Image from "next/image";
 import { useState } from "react";
 
 export default function Header() {
-  const [isActive,setIsActive]=useState(false);
-  
+  const [isActive, setIsActive] = useState(false);
 
   return (
-    <header className={`${styles.header} ${isActive?styles.isActive:""}`}>
+    <header className={`${styles.header} ${isActive ? styles.isActive : ""}`}>
       <div className="wrapper">
         <div className={styles.headerPc}>
           <h1 className={styles.logo}>
@@ -66,29 +65,76 @@ export default function Header() {
           </h1>
 
           <div className={styles.hbButtonWrapper}>
-            <button className={styles.hbButton} onClick={()=>{setIsActive(isActive=>!isActive)}}></button>
+            <button
+              className={styles.hbButton}
+              onClick={() => {
+                setIsActive((isActive) => !isActive);
+              }}
+            ></button>
           </div>
         </div>
 
         <nav className={styles.drawerSp}>
           <ul className={styles.drawerListSp}>
             <li>
-              <Link href="/">TOP</Link>
+              <Link
+                href="/"
+                onClick={() => {
+                  setIsActive(false);
+                }}
+              >
+                TOP
+              </Link>
             </li>
             <li>
-              <Link href="/about">手ぶら観光とは</Link>
+              <Link
+                href="/about"
+                onClick={() => {
+                  setIsActive(false);
+                }}
+              >
+                手ぶら観光とは
+              </Link>
             </li>
             <li>
-              <Link href="/guide">利用方法</Link>
+              <Link
+                href="/guide"
+                onClick={() => {
+                  setIsActive(false);
+                }}
+              >
+                利用方法
+              </Link>
             </li>
             <li>
-              <Link href="/ai-planner">AIプランナー</Link>
+              <Link
+                href="/ai-planner"
+                onClick={() => {
+                  setIsActive(false);
+                }}
+              >
+                AIプランナー
+              </Link>
             </li>
             <li>
-              <Link href="/counters">カウンターを探す</Link>
+              <Link
+                href="/counters"
+                onClick={() => {
+                  setIsActive(false);
+                }}
+              >
+                カウンターを探す
+              </Link>
             </li>
             <li>
-              <Link href="/contact">お問い合わせ</Link>
+              <Link
+                href="/contact"
+                onClick={() => {
+                  setIsActive(false);
+                }}
+              >
+                お問い合わせ
+              </Link>
             </li>
           </ul>
         </nav>

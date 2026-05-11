@@ -1,0 +1,229 @@
+.sectExplain {
+    margin-bottom: 20px;
+}
+
+/*faq*/
+.faqList {
+    --padding-x: 25px;
+    --padding-y: 30px;
+}
+
+.faq {
+
+    background-color: var(--white);
+    border-radius: 15px;
+}
+
+.faq:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.faqHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    font-size: 1.25rem;
+    cursor: pointer;
+    user-select: none;
+    padding: var(--padding-y) var(--padding-x);
+}
+
+.faq dd {
+    font-weight: 500;
+    overflow: hidden;
+    padding: 0 var(--padding-x);
+    /*開閉*/
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease;
+}
+
+.faq dd>div>* {
+    margin-bottom: 8px;
+}
+
+.faq dd>* {
+    /*開閉*/
+    overflow: hidden;
+}
+
+/*フォーマット変更*/
+.faq dd ul {
+    list-style: disc;
+    list-style-position: inside;
+}
+
+.faq dd a {
+    text-decoration: underline;
+    color: var(--accent1)
+}
+
+.faqHeadIcon {
+    width: 20px;
+    height: 16px;
+    position: relative;
+    transition: rotate 0.25s;
+}
+
+/*オープン時*/
+
+.isOpen.faq dd {
+    padding-bottom: var(--padding-y);
+    grid-template-rows: 1fr;
+}
+
+.isOpen.faq .faqHeadIcon {
+    rotate: -180deg;
+}
+
+/*form*/
+
+.form {
+    border-radius: 15px;
+    background-color: var(--white);
+    padding: 25px 25px 40px;
+}
+
+.formItem {
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.formItem:not(:last-of-type) {
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.formItem:last-of-type {
+    margin-bottom: 25px;
+}
+
+.formItemHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 20%;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.formItem label {
+    font-weight: 700;
+}
+
+.formItemTag {
+    line-height: 100%;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 5px;
+    background-color: var(--accent2);
+    padding: 4px 10px 5px;
+    flex-shrink: 0;
+}
+
+.formItem input,
+.formItem textarea {
+    background-color: var(--background);
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 10px 12px;
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+.formItem input {
+    max-width: 560px;
+}
+
+.formItem textarea {
+    resize: none;
+    height: 300px;
+}
+
+.formItemTextarea {
+    align-items: flex-start;
+}
+.formItemBody{
+    width: 100%;
+}
+.formErrorMsg{
+color:red;
+margin-top: 4px;
+font-size: 0.9375rem;
+}
+.formNote{
+    margin-top: 25px;
+}
+.formNote ul {
+    list-style: disc;
+    list-style-position: inside;
+}
+
+.formBtn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    background-color: var(--accent1);
+    color: var(--white);
+    border-radius: 5px;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 22px;
+    border: none;
+    transition: all 0.2s;
+}
+
+.formBtn:hover {
+    background-color: var(--accent1-dark);
+}
+
+.formBtnIcon {
+    position: relative;
+    height: 24px;
+    width: 24px;
+}
+
+@media screen and (max-width:768px) {
+    /*faq*/
+    .faqList {
+        --padding-x: 20px;
+        --padding-y: 25px;
+    }
+
+    .faqHead {
+        font-weight: 700;
+    }
+    .faq dd{
+        font-weight: 400;
+    }
+
+    /*form*/
+    .form{
+        padding-top: 5px;
+    }
+    .formItem{
+        flex-direction: column;
+        gap: 10px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .formItemHead{
+        width: 100%;
+        justify-content: flex-start;
+        gap: 20px;
+    }
+    .formNote{
+        margin-top: 20px;
+    }
+    .formItem:last-of-type{
+        margin-bottom: 5px;
+    }
+}

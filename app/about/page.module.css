@@ -1,0 +1,281 @@
+/* body {
+    max-width: 1980px;
+    margin: 0 auto;
+    padding: 0 clamp(4rem, 8%, 16rem);
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    color: #2c2c2c;
+    background-color: #F3F3F3;
+} */
+
+
+/*アバウトページ*/
+.AboutFlex {
+    display: flex;
+    gap: 3.5rem;
+}
+
+.AboutInnerFlex {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    min-width: 0;
+}
+
+.CounterInnerFlex {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    min-width: 0;
+}
+
+
+
+.SectionTitleEN {
+    display: inline-block;
+    background-color: #F9D77E;
+    font-size: 1rem;
+    font-weight: bold;
+
+    padding: 2px 15px;
+    border-radius: 3px;
+    position: relative;
+}
+
+.SectionTitle {
+    margin-top: 10px;
+    font-size: 2.5rem;
+    font-weight: bold;
+
+    margin-bottom: 3.25rem;
+}
+
+.TextHighlight {
+    color: #096148;
+}
+
+.SectionP {
+    margin-top: 10px;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+}
+
+.AboutInner {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.SectionText {
+    min-width: 0;
+    /* width: 47%; */
+}
+
+.AboutInnerImg {
+    min-width: 0;
+    width: 47%;
+    height: 100%;
+    aspect-ratio: 1/1;
+    position: relative;
+    max-width: 350px;
+    flex-shrink: 0;
+}
+
+
+.AboutInnerImg img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+}
+
+.CounterInnerImgWrapper {
+    flex-shrink: 0;
+    width: 47%;
+    max-width: 350px;
+}
+
+.CounterInnerImg {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 533/296;
+    margin-bottom: 10px;
+}
+
+.CounterInnerImgNote {
+    word-break: break-all;
+    font-size: 0.875rem;
+}
+
+.CounterInnerImg img {
+    width: 100%;
+
+    height: auto;
+}
+
+.AboutDivider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 6.4rem 0;
+}
+
+.AboutMeritInner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3.5rem;
+    padding-top: 50px;
+}
+
+.AboutCard {
+    position: relative;
+    background-color: #fff;
+    padding: 70px 1.3rem 30px;
+    border-radius: 0.625rem;
+}
+
+.AboutCardImg {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    translate: -50% 0;
+    width: 100px;
+    aspect-ratio: 1/1;
+}
+
+.AboutCardImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.AboutCardTitle {
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+
+    margin-bottom: 0.6rem;
+}
+
+.AboutCardP {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+}
+
+.AboutSubTitle {
+    display: inline-block;
+    background-color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+
+    padding: 0.8rem 1.6rem;
+    border-radius: 1.25rem;
+    position: relative;
+
+    margin-bottom: 2rem;
+}
+
+.AboutSubTitle::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px 7px 0 7px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+
+.AboutSubTitleFlex {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+.AboutContents {
+    flex: 1;
+    max-width: 400px;
+}
+
+.AboutMannerInner {
+    display: flex;
+    gap: 3.5rem;
+}
+
+.AboutFlexSub {
+    display: flex;
+    margin-bottom: 1rem;
+    gap: 4px;
+
+}
+
+.AboutFlexSub::before {
+    flex-shrink: 0;
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-top: 8px;
+    margin-right: 8px;
+    background-image: url('/images/icon_check_gray.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+.AboutP {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 200%;
+}
+
+.CounterInnerP {
+    margin-top: 10px;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+    margin-bottom: 30px;
+
+    word-break: break-all;
+}
+
+@media screen and (max-width: 768px) {
+
+    body {
+        padding: 0 1.2rem;
+    }
+
+
+
+    .AboutFlex,
+    .AboutInnerFlex,
+    .CounterInnerFlex,
+    .AboutMeritInner,
+    .AboutMannerInner {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .AboutContents,
+    .AboutCard,
+    .CounterInnerP,
+    .SectionText {
+        width: 100%;
+    }
+
+    .SectionTitle {
+        font-size: 1.8rem;
+    }
+
+    .AboutFlex {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .AboutDivider {
+        margin: 3rem 0;
+    }
+}

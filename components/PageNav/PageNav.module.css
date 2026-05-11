@@ -1,0 +1,59 @@
+.PageNavEN {
+    display: inline-block;
+    background-color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+
+    padding: 2px 15px;
+    border-radius: 0.5rem;
+    position: relative;
+}
+
+.PageNavEN::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px 7px 0 7px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+
+.PageNav {
+    position: sticky;
+    top: 30px;
+    align-self: flex-start;
+    flex-shrink: 0;
+    padding-top: var(--section-padding);
+}
+
+.PageNav a {
+    text-decoration: none;
+
+    color: #1B1A19;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+
+    padding: 0.2rem 0.6rem;
+}
+
+.PageNav li {
+    list-style: none;
+    margin: 1.3rem 0;
+}
+
+.PageNav a:hover {
+    border-radius: 0.3125rem;
+    background: #C2DED8;
+    padding: 0.2rem 0.6rem;
+}
+
+
+@media screen and (max-width:768px) {
+    .PageNav {
+        display: none;
+    }
+}

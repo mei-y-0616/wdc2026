@@ -49,9 +49,10 @@
     position: relative;
     font-size: 0.9375rem;
     font-weight: bold;
+    transition: all 0.1s;
 }
 
-.nav ul li a:not(.navListContact)::before {
+/* .nav ul li a:not(.navListContact)::before {
     position: absolute;
     content: "";
     bottom: 0;
@@ -63,11 +64,10 @@
     scale: 0;
     transform-origin: center left;
     transition: scale 0.2s;
-}
+} */
 
-.nav ul li a:hover::before {
-    scale: 100%;
-    text-decoration: underline;
+.nav ul li a:hover {
+    color:var(--accent1);
 }
 
 
@@ -76,12 +76,12 @@
     background-color: var(--font);
     color: var(--background);
     border-radius: 6px;
-    transition: all 0.2s;
+    transition: all 0.1s;
     font-weight: 500 !important;
 }
 
 .navListContact:hover {
-    outline: 1px solid var(--font);
+    outline: 1px solid var(--accent1);
     background-color: var(--white);
     color: var(--font);
 }
