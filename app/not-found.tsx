@@ -1,5 +1,9 @@
 import styles from "./notFound.module.css";
 
+export const metadata={
+  title:"お探しのページは見つかりませんでした。"
+}
+
 export default function NotFound() {
   return (
     <div className="container">

@@ -7,7 +7,7 @@ import LinkButton from "@/components/LinkButton/LinkButton";
 import type {links} from "@/types/pageLink"
 
 export const metadata = {
-  title: "ABOUT",
+  title: "手ぶら観光について",
 };
 const links:links = [
   { href: "About", name: "手ぶら観光とは" },

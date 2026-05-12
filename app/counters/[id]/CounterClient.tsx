@@ -7,7 +7,6 @@ import CounterMap from "@/components/CounterMap/CounterMap";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import DetailItem from "@/components/counter/DetailItem/DetailItem";
 import {
-  getPrefName,
   getParsePhone,
   getLanguage,
 } from "@/utils/counter/counterFuns";
@@ -72,10 +71,7 @@ export default function CounterClient({
                       imageSrc="/images/icon_map_gray.svg"
                       explain={
                         <p>
-                          {getPrefName(
-                            String(c.pref_code) + String(c.city_code),
-                          )}
-                          {c.address_ja}
+                          {c.x_full_address_ja}
                         </p>
                       }
                     />

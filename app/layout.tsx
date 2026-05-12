@@ -17,10 +17,10 @@ const zenKakuGothicNew = Zen_Kaku_Gothic_New({
 
 export const metadata = {
   title: {
-    template:"%s | AIのAPIアプリ",
-    default:"AIのAPIアプリ",
+    template:"%s | LuggGo!",
+    default:"LuggGo!",
   },
-  description: "AIのAPIを呼び出すアプリです。",
+  description: "日本の「手ぶら観光」と「手ぶら観光カウンター」について掲載しています。カウンター検索機能の他、AIがあなたの旅程にぴったりの手ぶら観光カウンターをご提案する「AI手ぶら観光プランナー」を搭載。",
 };
 
 export default function RootLayout({ children }:{children:any}) {

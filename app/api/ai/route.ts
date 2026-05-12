@@ -6,6 +6,8 @@ import fs from "fs";
 import path from "path";
 import { z } from "zod";
 
+  console.log(process.env.GEMINI_API_KEY)
+
 //データベースのスキーマを取得
 const pnt = /model counter \{([^*]+)\}/;
 let schema = fs.readFileSync(
