@@ -5,6 +5,7 @@ import Image from "next/image";
 import SectTitle from "@/components/SectTitle/SectTitle";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import type {links} from "@/types/pageLink"
+import BeforeFooter from "@/components/BeforeFooter/BeforeFooter";
 
 export const metadata = {
   title: "手ぶら観光について",
@@ -231,6 +232,7 @@ export default function About() {
           </div>
         </div>
       </div>
+      <BeforeFooter/>
     </>
   );
 }

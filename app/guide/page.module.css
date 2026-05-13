@@ -1,0 +1,457 @@
+.HowFlex {
+    display: flex;
+    gap: 3.5rem;
+}
+
+.HowNavEN {
+    display: inline-block;
+    background-color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+
+    padding: 2px 15px;
+    border-radius: 0.5rem;
+    position: relative;
+    z-index: 0;
+}
+
+.HowNavEN::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px 7px 0 7px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+
+.HowNav {
+    position: sticky;
+    top: 5rem;
+    align-self: flex-start;
+}
+
+.HowNav a {
+    text-decoration: none;
+
+    color: #1B1A19;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+
+    padding: 0.2rem 0.6rem;
+}
+
+.HowNav li {
+    list-style: none;
+    margin: 1.3rem 0;
+}
+
+.HowNav a:hover {
+    border-radius: 0.3125rem;
+    background: #C2DED8;
+    padding: 0.2rem 0.6rem;
+}
+
+.HowNavENWrap {
+    position: relative;
+    display: inline-block;
+}
+
+.HowNavFlower {
+    position: absolute;
+    top: -2.3rem;
+    right: 0rem;
+    width: 1.8rem;
+    height: auto;
+    z-index: 1;
+}
+
+.HowInner {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.HowInnerFlex {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    min-width: 0;
+    position: relative;
+
+    margin-bottom: 2.3rem;
+}
+
+.SectionText {
+    width: min(30rem, 100%);
+}
+
+.SectionTitleEN {
+    display: inline-block;
+    background-color: #F9D77E;
+    font-size: 1rem;
+    font-weight: bold;
+
+    padding: 2px 15px;
+    border-radius: 3px;
+    position: relative;
+}
+
+.SectionTitle {
+    margin-top: 10px;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.HowTitleImg {
+    width: 6rem;
+    height: auto;
+    align-self: flex-end;
+    position: absolute;
+
+    left: 80%;
+    bottom: -2.3rem;
+}
+
+.TextHighlight {
+    color: #096148;
+}
+
+.SectionP {
+    margin-top: 10px;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+}
+
+.HowCard {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 2.5rem 2.5rem;
+    position: relative;
+    margin-bottom: 3rem;
+}
+.bag{
+    position: absolute;
+    right: 60px;
+    top: 0;
+    translate: 0 calc(-100% + 1px);
+    width: 86px;
+    aspect-ratio: 86.78/70.39;
+}
+.bag img{
+    width: 100%;height: 100%;
+    object-fit: contain;
+}
+
+
+
+.HowCard::after {
+    content: "";
+    position: absolute;
+    bottom: -1.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 1.8rem 1.5rem 0 1.5rem;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+
+.HowCard_last {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 2.5rem 2.5rem;
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.HowLeft {
+    text-align: center;
+    flex-shrink: 0;
+    width: 6rem;
+}
+
+.HowNumberTitleSub {
+    color: #005CAF;
+    text-align: center;
+
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 150%;
+}
+
+.HowNumber {
+    color: #005CAF;
+    text-align: center;
+
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 0.8;
+}
+
+.HowIcon {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-top: 1.5rem;
+}
+
+.HowCardDivider {
+    width: 1px;
+    align-self: stretch;
+    background-color: #ddd;
+    flex-shrink: 0;
+}
+
+.HowDivider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 6.4rem 0;
+}
+
+.HowRight {
+    flex: 1;
+    min-width: 0;
+    text-align: right;
+}
+
+.HowCardTitle {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+
+    text-align: left;
+}
+
+.HowCardP {
+    font-size: 1rem;
+    line-height: 1.7;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+
+    text-align: left;
+}
+
+.HowCardNote {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+
+    text-align: left;
+}
+
+.SectionButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #005CAF;
+    color: #F3F3F3;
+    text-decoration: none;
+
+    font-size: 1rem;
+    font-weight: 700;
+
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    transition: background-color 0.2s ease;
+}
+
+.SectionButton:hover {
+    background-color: #003f7a;
+}
+
+.SectionButtonArrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #005CAF;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.3rem;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-left: 1rem;
+
+    transition: color 0.2s ease;
+}
+
+.SectionButton:hover .SectionButtonArrow {
+    color: #003f7a;
+}
+
+.PriceGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.PriceCard {
+    background-color: #fff;
+    border-radius: 0.8rem;
+    border: 2px solid #00896C;
+    padding: 1.8rem 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.PriceCardTitle {
+    color: #00896C;
+    ;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 0.6rem;
+}
+
+.PriceCardP {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #555;
+}
+
+.PriceCardPrice {
+    font-size: 2.25rem;
+    font-weight: bold;
+    text-align: right;
+    margin-top: auto;
+}
+
+.PriceCardNote {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+}
+
+.PriceAnnotation {
+    text-align: right;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 1rem;
+}
+
+.PriceTitleImg {
+    width: 4rem;
+    height: auto;
+    align-self: flex-end;
+    position: absolute;
+
+    left: 85%;
+    bottom: -2.3rem;
+}
+.linkButtonWrapper{
+    width: fit-content;
+    margin: 0 0 15px auto;
+}
+
+@media screen and (max-width: 768px) {
+
+    .HowNav {
+        display: none;
+    }
+
+    .SectionTitle {
+        font-size: 1.8rem;
+    }
+
+    .HowTitleImg {
+        width: 5rem;
+        height: auto;
+        align-self: flex-end;
+        position: absolute;
+
+        left: 70%;
+        bottom: -2.3rem;
+    }
+
+    .HowCard,
+    .HowCard_last {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+    .bag{
+        right: 30px;
+        width: 70px;
+    }
+
+    .HowCardDivider {
+        width: 100%;
+        height: 1px;
+        align-self: auto;
+    }
+
+    .HowRight {
+        text-align: left;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .HowCardTitle,
+    .HowCardP,
+    .HowCardNote {
+        width: 100%;
+        text-align: left;
+    }
+
+    .HowLeft {
+        display: flex;
+        text-align: left;
+        align-items: center;
+        gap: 2.7rem;
+        width: auto;
+    }
+
+    .HowNumberTitleSub,
+    .HowNumber {
+        text-align: left;
+    }
+
+    .PriceGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .PriceCardPrice {
+        font-size: 1.6rem;
+    }
+
+    .PriceAnnotation {
+        text-align: left;
+    }
+
+    .HowDivider {
+        margin: 3rem 0;
+    }
+
+    .SectionButton {
+        display: inline-flex;
+        width: auto;
+        text-align: left;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .PriceTitleImg {
+        display: none;
+    }
+}

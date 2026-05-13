@@ -19,6 +19,7 @@ export default function ClientAiPlanner() {
   const [response, setResponse] = useState<string | null>();
   const [countersId, setCountersId] = useState<number[]>([]);
   const [countersData, setCountersData] = useState<Array<counter>>([]);
+  const [isThinking,setIsThinking]=useState<boolean>(false);
 
   async function handleSubmit(e: any) {
     e.preventDefault();

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import CounterClient from "./CounterClient";
-import type { counter } from "@/app/generated/prisma/client";
 import { cache } from "react";
+import { prisma } from "@/lib/prisma";
 
 export async function generateMetadata({ params }: Prop) {
   const { id } = await params;
@@ -30,19 +30,9 @@ type Prop = {
 
 const getCounter = cache(async (id: number) => {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/prisma/find-unique`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ where: { id: id } }),
-      },
-    );
-    const data = await res.json();
-    const counter = data.res;
+    const counter = await prisma.counter.findUnique({
+      where: { id: id },
+    });
     return counter;
   } catch {
     return null;

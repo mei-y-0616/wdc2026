@@ -51,7 +51,9 @@ section {
 section:not(:last-of-type) {
   border-bottom: 1px solid #D9D9D9;
 }
-
+section:last-of-type{
+  margin-bottom: 150px;
+}
 * {
   font-family: "Zen Kaku Gothic New", sans-serif;
 }
@@ -123,5 +125,8 @@ a {
 @media screen and (max-width:768px) {
   :root{
     --section-padding:70px;
+  }
+  section:last-of-type{
+    margin-bottom: 100px;
   }
 }
