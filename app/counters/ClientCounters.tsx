@@ -470,6 +470,7 @@ export default function ClientCounters() {
     fetchDataCounter();
   }, [page]);
 
+  console.log(countersData)
   return (
     <>
       <PageTitle
