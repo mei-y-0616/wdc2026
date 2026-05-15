@@ -2,7 +2,7 @@
 import styles from "./CounterMap.module.css";
 import Link from "next/link";
 import { useState, useCallback, memo } from "react";
-import type { counter } from "@/app/generated/prisma/client";
+import type { counter } from "@prisma/client";
 import {
   AdvancedMarker,
   APIProvider,

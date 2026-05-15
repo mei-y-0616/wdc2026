@@ -1,6 +1,6 @@
 import styles from "./RunTime.module.css"
 import { judgeRunTime } from "@/utils/counter/counterFuns";
-import type { counter } from "@/app/generated/prisma/client";
+import type { counter } from "@prisma/client";
 
 export default function RunTime({ c }: { c: counter }) {
   return (

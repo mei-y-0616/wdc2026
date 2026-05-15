@@ -1,7 +1,7 @@
 "use client";
 import styles from "./page.module.css";
 import Link from "next/link";
-import type { counter } from "@/app/generated/prisma/client";
+import type { counter } from "@prisma/client";
 import TagList from "@/components/counter/TagList/TagList";
 import CounterMap from "@/components/CounterMap/CounterMap";
 import PageTitle from "@/components/PageTitle/PageTitle";

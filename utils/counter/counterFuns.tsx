@@ -1,6 +1,6 @@
 import { prefCodeList } from "@/data/pref_code";
 import { parsePhoneNumberWithError } from "libphonenumber-js";
-import type { counter } from "@/app/generated/prisma/client";
+import type { counter } from "@prisma/client";
 
 export function getPrefName(code: string) {
   const c = code.padStart(6, "0");

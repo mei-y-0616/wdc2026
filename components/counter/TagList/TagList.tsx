@@ -1,6 +1,6 @@
 import styles from "./TagList.module.css";
 import { areaObj } from "@/data/pref_code";
-import type { counter } from "@/app/generated/prisma/client";
+import type { counter } from "@prisma/client";
 
 export default function TagList({counter}:{counter:counter}) {
   function getAreaTag(pref_code: number) {

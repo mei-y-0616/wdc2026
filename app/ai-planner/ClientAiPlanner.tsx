@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import ReactMarkdown from "react-markdown";
 import "dotenv/config";
-import type { counter } from "@/app/generated/prisma/client";
+import type { counter } from "@prisma/client";
 import CounterMap from "@/components/CounterMap/CounterMap";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import Image from "next/image";

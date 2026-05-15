@@ -1,4 +1,4 @@
-import type { counter } from "@/app/generated/prisma/client";
+import type { counter } from "@prisma/client";
 import prisma from "@/lib/prisma";
 import { judgeRunTime, getLanguage, getPrice } from "./counterFuns";
 import { xid } from "zod";
