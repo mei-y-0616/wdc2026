@@ -9,15 +9,10 @@ import { Prisma } from "@/app/generated/prisma/client";
 import CounterMap from "@/components/CounterMap/CounterMap";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import LinkButton from "@/components/LinkButton/LinkButton";
-import {
-  getParsePhone,
-  getLanguage,
-} from "@/utils/counter/counterFuns";
+import { getParsePhone, getLanguage } from "@/utils/counter/counterFuns";
 import TagList from "@/components/counter/TagList/TagList";
 import RunTime from "@/components/counter/RunTime/RunTime";
 import DetailItem from "@/components/counter/DetailItem/DetailItem";
-
-
 
 const serviceObj: Record<string, string> = {
   has_storage: "一時預かり",
@@ -422,18 +417,21 @@ export default function ClientCounters() {
 
   async function fetchDataCounter() {
     console.log("fetchDataCounter");
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/prisma/search-counter-data`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/prisma/search-counter-data`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          skip: display === "list" ? skip : undefined,
+          take: display === "list" ? limit : undefined,
+          where: prismaCreateWhere(),
+        }),
       },
-      body: JSON.stringify({
-        skip: display === "list" ? skip : undefined,
-        take: display === "list" ? limit : undefined,
-        where: prismaCreateWhere(),
-      }),
-    });
+    );
     const data = await res.json();
     setCountersData(data.res);
   }
@@ -441,16 +439,19 @@ export default function ClientCounters() {
   useEffect(() => {
     console.log("use effect areas,services");
     async function fetchDataNum() {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/prisma/search-counter-num`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/api/prisma/search-counter-num`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            where: prismaCreateWhere(),
+          }),
         },
-        body: JSON.stringify({
-          where: prismaCreateWhere(),
-        }),
-      });
+      );
       const data = await res.json();
       setCount(data.count);
     }
@@ -470,7 +471,7 @@ export default function ClientCounters() {
     fetchDataCounter();
   }, [page]);
 
-  console.log(countersData)
+  console.log(countersData);
   return (
     <>
       <PageTitle
@@ -516,17 +517,63 @@ export default function ClientCounters() {
             {display === "list" && (
               <div className={styles.countersAndPager}>
                 <ul className={styles.counterList}>
-                  {countersData.map((counter) => (
-                    <li key={counter.id} className={styles.counter}>
-                      <article>
-                        <div className={styles.counterHead}>
-                          <div className={styles.counterHeadLeft}>
-                            <h3 className={styles.counterName}>
-                              {counter.counter_name_ja}
-                            </h3>
-                            <TagList counter={counter} />
+                  {countersData &&
+                    countersData.map((counter) => (
+                      <li key={counter.id} className={styles.counter}>
+                        <article>
+                          <div className={styles.counterHead}>
+                            <div className={styles.counterHeadLeft}>
+                              <h3 className={styles.counterName}>
+                                {counter.counter_name_ja}
+                              </h3>
+                              <TagList counter={counter} />
+                            </div>
+                            <div className={styles.counterHeadRight}>
+                              <Link
+                                href={`https://maps.google.com/maps?ll=${counter.latitude},${counter.longitude}&z=17&q=${counter.latitude},${counter.longitude}`}
+                                className={styles.counterMapLink}
+                              >
+                                <div className={styles.counterMapLinkIcon}>
+                                  <Image
+                                    src="/images/icon_maplink_white.svg"
+                                    width={0}
+                                    height={0}
+                                    sizes="100%"
+                                    style={{ width: "auto", height: "45px" }}
+                                    alt=""
+                                  ></Image>
+                                </div>
+                              </Link>
+
+                              <LinkButton
+                                path={`/counters/${counter.id}`}
+                                msg="カウンターの詳細へ"
+                              ></LinkButton>
+                            </div>
                           </div>
-                          <div className={styles.counterHeadRight}>
+                          <div className={styles.counterBottom}>
+                            <DetailItem
+                              imageSrc="/images/icon_map_gray.svg"
+                              explain={<p>{counter.x_full_address_ja}</p>}
+                            />
+
+                            <DetailItem
+                              imageSrc="/images/icon_phone_gray.svg"
+                              explain={<p>{getParsePhone(counter.phone)}</p>}
+                            />
+
+                            <DetailItem
+                              imageSrc="/images/icon_time_gray.svg"
+                              explain={<RunTime c={counter} />}
+                            />
+
+                            <DetailItem
+                              imageSrc="/images/icon_lang_gray.svg"
+                              explain={<p>対応言語：{getLanguage(counter)}</p>}
+                            />
+                          </div>
+
+                          <div className={styles.counterHeadRightSp}>
                             <Link
                               href={`https://maps.google.com/maps?ll=${counter.latitude},${counter.longitude}&z=17&q=${counter.latitude},${counter.longitude}`}
                               className={styles.counterMapLink}
@@ -548,58 +595,9 @@ export default function ClientCounters() {
                               msg="カウンターの詳細へ"
                             ></LinkButton>
                           </div>
-                        </div>
-                        <div className={styles.counterBottom}>
-                          <DetailItem
-                            imageSrc="/images/icon_map_gray.svg"
-                            explain={
-                              <p>
-                                {counter.x_full_address_ja}
-                              </p>
-                            }
-                          />
-
-                          <DetailItem
-                            imageSrc="/images/icon_phone_gray.svg"
-                            explain={<p>{getParsePhone(counter.phone)}</p>}
-                          />
-
-                          <DetailItem
-                            imageSrc="/images/icon_time_gray.svg"
-                            explain={<RunTime c={counter} />}
-                          />
-
-                          <DetailItem
-                            imageSrc="/images/icon_lang_gray.svg"
-                            explain={<p>対応言語：{getLanguage(counter)}</p>}
-                          />
-                        </div>
-
-                        <div className={styles.counterHeadRightSp}>
-                          <Link
-                            href={`https://maps.google.com/maps?ll=${counter.latitude},${counter.longitude}&z=17&q=${counter.latitude},${counter.longitude}`}
-                            className={styles.counterMapLink}
-                          >
-                            <div className={styles.counterMapLinkIcon}>
-                              <Image
-                                src="/images/icon_maplink_white.svg"
-                                width={0}
-                                height={0}
-                                sizes="100%"
-                                style={{ width: "auto", height: "45px" }}
-                                alt=""
-                              ></Image>
-                            </div>
-                          </Link>
-
-                          <LinkButton
-                            path={`/counters/${counter.id}`}
-                            msg="カウンターの詳細へ"
-                          ></LinkButton>
-                        </div>
-                      </article>
-                    </li>
-                  ))}
+                        </article>
+                      </li>
+                    ))}
                 </ul>
 
                 {count > 0 && (
@@ -613,7 +611,7 @@ export default function ClientCounters() {
               </div>
             )}
 
-            {display === "map" && (
+            {display === "map" && countersData && (
               <div className={styles.counterMap}>
                 <CounterMap counters={countersData} link={true}></CounterMap>
               </div>
