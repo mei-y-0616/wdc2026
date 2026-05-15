@@ -433,7 +433,9 @@ export default function ClientCounters() {
       },
     );
     const data = await res.json();
-    setCountersData(data.res);
+    if (Array.isArray(data.res)) {
+      setCountersData(data.res);
+    }
   }
 
   useEffect(() => {
