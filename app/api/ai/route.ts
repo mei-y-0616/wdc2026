@@ -6,6 +6,7 @@ import fs from "fs";
 import path from "path";
 import { z } from "zod";
 import counterSchema from "@/data/counterSchema";
+import { shorteningCounterData } from "@/utils/counter/counterDbFuns";
 
 //データベースのスキーマを取得
 // const pnt = /model counter \{([^*]+)\}/;
@@ -74,7 +75,7 @@ export async function POST(request: NextRequest) {
             `あなたは日本の手ぶら観光カウンターについて詳しい人です。手ぶら観光カウンター一覧のデータベースから、ユーザーの旅程に関連しそうな手ぶら観光カウンターを既にいくつかピックアップしてあります。以下のデータを元に、このユーザーの旅程に合った手ぶら観光カウンターの利用スケジュールを考えてください。
           
           JSONデータ（文字に変換済み）:
-          ${JSON.stringify(dbResult)}
+          ${JSON.stringify(shorteningCounterData(dbResult))}
           `,
             `適切なスケジュールを組めるときは文中でスケジュールを書いてください。スケジュールは大体
           (日時)：(カウンター名)で(サービスの種類 一時預かり/当日配送/一般配送/海外配送)

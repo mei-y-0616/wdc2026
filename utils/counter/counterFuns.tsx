@@ -55,6 +55,7 @@ export function judgeRunTime({
   } else {
     return "---";
   }
+  return "---";
 }
 
 export function getLanguage(c: counter) {
@@ -82,5 +83,21 @@ export function getLanguage(c: counter) {
     return languageStr;
   } else {
     return "データなし";
+  }
+}
+
+export function getPrice({
+  fixed,
+  max,
+  min,
+}: {
+  fixed: string | null;
+  max: string | null;
+  min: string | null;
+}) {
+  if (fixed) {
+    return fixed
+  } else {
+    return (min ?? "---")+"～"+(max ?? "---")
   }
 }
