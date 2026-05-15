@@ -422,7 +422,7 @@ export default function ClientCounters() {
 
   async function fetchDataCounter() {
     console.log("fetchDataCounter");
-    const res = await fetch("/api/prisma/search-counter-data", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/prisma/search-counter-data`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -441,7 +441,7 @@ export default function ClientCounters() {
   useEffect(() => {
     console.log("use effect areas,services");
     async function fetchDataNum() {
-      const res = await fetch("/api/prisma/search-counter-num", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/prisma/search-counter-num`, {
         method: "POST",
         headers: {
           Accept: "application/json",

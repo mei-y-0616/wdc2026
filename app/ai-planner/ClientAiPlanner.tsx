@@ -40,7 +40,7 @@ export default function ClientAiPlanner() {
     setCountersData([]);
     setIsThinking(true);
 
-    const res = await fetch("/api/ai", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/ai`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -61,7 +61,7 @@ export default function ClientAiPlanner() {
   useEffect(() => {
     if (countersId.length === 0) return;
     async function fetchCounter(countersId: number[]) {
-      const countersRes = await fetch("/api/prisma/search-counter-data", {
+      const countersRes = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/prisma/search-counter-data`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -91,7 +91,7 @@ export default function ClientAiPlanner() {
               name="prompt"
               onChange={(e) => setPrompt(e.target.value)}
               className={styles.promptInput}
-              placeholder="例）○/○の9時に△△空港に到着して、その後□□通りを観光したあと、15時に××ホテルにチェックインします。"
+              placeholder={`○/○ 9時に△△空港に到着\n 観光後、15時に××ホテルにチェックイン\n ...のような感じで自由に記述してください！`}
             ></textarea>
             <button type="submit" className={styles.submitButton}>
               <p className={styles.submitText}>AIプランナーに送信</p>
@@ -105,9 +105,11 @@ export default function ClientAiPlanner() {
                   width={77}
                   height={43}
                   alt=""
+                  unoptimized
                 />
               </div>
             </button>
+            {isThinking&&<p className={styles.loadingNote}>返答までに数十秒かかります。少々お待ちください。</p>}
           </form>
 
           {response && (

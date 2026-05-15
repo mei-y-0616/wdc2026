@@ -78,6 +78,11 @@
 .loadingText {
   display: none;
 }
+.loadingNote{
+  margin-top: 15px;
+  font-size: 0.9375rem;
+  text-align: center;
+}
 
 /*isThinking*/
 .isThinking .submitIcon {
