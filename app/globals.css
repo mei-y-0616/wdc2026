@@ -13,7 +13,7 @@
   --max-width: 1200px;
   --container-gap: 25px;
   --inner-gap: 25px;
-  --section-padding:100px;
+  --section-padding: 100px;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -51,35 +51,41 @@ section {
 section:not(:last-of-type) {
   border-bottom: 1px solid #D9D9D9;
 }
-section:last-of-type{
+
+section:last-of-type {
   margin-bottom: 150px;
 }
+
 * {
   font-family: "Zen Kaku Gothic New", sans-serif;
 }
 
-.main {
-  padding-top: 100px;
-}
+
 
 .wrapper {
   max-width: calc(var(--max-width) + var(--side-margin)*2);
-  padding: 0 var(--side-margin);
-  margin: 0 auto;
+  padding-left: var(--side-margin);
+  padding-right: var(--side-margin);
+  margin-left: auto;
+  margin-right:auto ;
 }
 
 .container {
 
   max-width: calc(var(--max-width) - var(--container-gap)*2 + var(--side-margin)*2);
-  margin: 0 auto;
-  padding: 0 var(--side-margin);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--side-margin);
+  padding-right:var(--side-margin) ;
 }
 
 .inner {
 
   max-width: calc(var(--max-width) - var(--container-gap)*2 - var(--inner-gap)*2 + var(--side-margin)*2);
-  margin: 0 auto;
-  padding: 0 var(--side-margin);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--side-margin);
+  padding-right: var(--side-margin);
 }
 
 .note {
@@ -123,10 +129,11 @@ a {
 }
 
 @media screen and (max-width:768px) {
-  :root{
-    --section-padding:70px;
+  :root {
+    --section-padding: 70px;
   }
-  section:last-of-type{
+
+  section:last-of-type {
     margin-bottom: 100px;
   }
 }

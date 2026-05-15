@@ -1,6 +1,6 @@
-.LinkButton{
+.LinkButton {
     background-color: var(--accent1);
-    color:var(--white);
+    color: var(--white);
     font-weight: 700;
     font-size: 0.875rem;
     transition: all 0.2s;
@@ -11,7 +11,8 @@
     border-radius: 5px;
     gap: 25px;
 }
-.LinkButton span{
+
+.LinkButton span {
     height: 30px;
     width: 30px;
     background-color: var(--white);
@@ -19,16 +20,19 @@
     display: grid;
     place-items: center;
     flex-shrink: 0;
+    color: var(--accent1);
 }
-.LinkButton span img{
-    /* width: 12px; */
-}
-.LinkButton:hover{
+
+.LinkButton:hover {
     background-color: var(--accent1-dark);
 }
 
-@media screen and (max-width:768px){
-    .LinkButton{
+.LinkButton:hover span {
+    color: var(--accent1-dark);
+}
+
+@media screen and (max-width:768px) {
+    .LinkButton {
         font-size: 0.9375rem;
     }
 }

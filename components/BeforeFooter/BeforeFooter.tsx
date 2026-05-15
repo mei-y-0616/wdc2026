@@ -7,7 +7,7 @@ export default function BeforeFooter() {
     <>
       <div className={styles.beforeFooter}>
         <div className={styles.surfing}>
-          <Image src="/images/img_surfing.png" fill alt="" />
+          <Image src="/images/img_surfing.png" sizes="300px 189px" fill alt="" />
         </div>
         <div className={styles.wave}></div>
         <div className={styles.main}>

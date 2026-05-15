@@ -29,7 +29,7 @@ export default function RootLayout({ children }:{children:any}) {
       {/* <body className={`${geistSans.variable} ${geistMono.variable}`}> */}
       <body className={zenKakuGothicNew.className}>
         <Header></Header>
-        <main className={styles.main}>
+        <main>
           {children}
         </main>
         <Footer></Footer>

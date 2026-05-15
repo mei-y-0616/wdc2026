@@ -10,22 +10,35 @@ import Image from "next/image";
 import TagList from "@/components/counter/TagList/TagList";
 import DetailItem from "@/components/counter/DetailItem/DetailItem";
 import LinkButton from "@/components/LinkButton/LinkButton";
-
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+gsap.registerPlugin(ScrollToPlugin);
 
 export default function ClientAiPlanner() {
-
   //トップレベルに書く
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState<string | null>();
   const [countersId, setCountersId] = useState<number[]>([]);
   const [countersData, setCountersData] = useState<Array<counter>>([]);
-  const [isThinking,setIsThinking]=useState<boolean>(false);
+  const [isThinking, setIsThinking] = useState<boolean>(false);
+
+  gsap.registerPlugin(useGSAP);
+  useGSAP(() => {
+    if (response) {
+      gsap.to(window,{
+        duration:1,
+        scrollTo:{y:"#response",offsetY:100}
+      })
+    }
+  }, [response]);
 
   async function handleSubmit(e: any) {
     e.preventDefault();
 
     setResponse(null);
     setCountersData([]);
+    setIsThinking(true);
 
     const res = await fetch("/api/ai", {
       method: "POST",
@@ -38,6 +51,7 @@ export default function ClientAiPlanner() {
 
     const data = await res.json();
     setResponse(data.res);
+    setIsThinking(false);
     if (data.counters) {
       setCountersId(data.counters);
     }
@@ -63,19 +77,11 @@ export default function ClientAiPlanner() {
     fetchCounter(countersId);
   }, [countersId]);
 
-  // useEffect(() => {
-  //   const form = document.querySelector("#form");
-  //   const rect = form?.getBoundingClientRect();
-  //   if (rect) {
-  //     window.moveTo(0, rect.top + rect.height);
-  //   }
-  // }, [prompt]);
-
   return (
     <>
       <PageTitle titleEn="AI Planner" titleJa="AI手ぶら観光プランナー" />
       <div className="container">
-        <section>
+        <section className={isThinking ? styles.isThinking : ""}>
           <form onSubmit={handleSubmit} className={styles.formArea} id="form">
             <label className={styles.promptLabel} htmlFor="prompt">
               ここにあなたの旅程を入力
@@ -88,15 +94,24 @@ export default function ClientAiPlanner() {
               placeholder="例）○/○の9時に△△空港に到着して、その後□□通りを観光したあと、15時に××ホテルにチェックインします。"
             ></textarea>
             <button type="submit" className={styles.submitButton}>
-              AIプランナーに送信
+              <p className={styles.submitText}>AIプランナーに送信</p>
+              <p className={styles.loadingText}>AIが考え中…</p>
               <div className={styles.submitIcon}>
                 <Image src="/images/icon_submit_white.svg" fill alt="" />
+              </div>
+              <div className={styles.loadingIcon}>
+                <Image
+                  src="/images/anime_truck.gif"
+                  width={77}
+                  height={43}
+                  alt=""
+                />
               </div>
             </button>
           </form>
 
           {response && (
-            <div className={`${styles.response} inner`}>
+            <div className={`${styles.response} inner`} id="response">
               <h3 className={styles.responseTitle}>
                 <div className={styles.responseTitleIcon}>
                   <Image src="/images/icon_checkbox_green.svg" fill alt="" />
@@ -127,11 +142,7 @@ export default function ClientAiPlanner() {
                             <div className={styles.counterBottom}>
                               <DetailItem
                                 imageSrc="/images/icon_map_gray.svg"
-                                explain={
-                                  <p>
-                                    {c.x_full_address_ja}
-                                  </p>
-                                }
+                                explain={<p>{c.x_full_address_ja}</p>}
                               />
                               <LinkButton
                                 path={`/counters/${c.id}`}

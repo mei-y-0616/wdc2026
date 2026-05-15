@@ -5,16 +5,15 @@ import { Prisma } from "@/app/generated/prisma/client";
 import fs from "fs";
 import path from "path";
 import { z } from "zod";
-
-  console.log(process.env.GEMINI_API_KEY)
+import counterSchema from "@/data/counterSchema";
 
 //データベースのスキーマを取得
-const pnt = /model counter \{([^*]+)\}/;
-let schema = fs.readFileSync(
-  path.join(process.cwd(), "prisma/schema.prisma"),
-  "utf-8",
-);
-const execSchema = pnt.exec(schema);
+// const pnt = /model counter \{([^*]+)\}/;
+// let schema = fs.readFileSync(
+//   path.join(process.cwd(), "prisma/schema.prisma"),
+//   "utf-8",
+// );
+// const execSchema = pnt.exec(schema);
 
 //responseSchema用
 const aiResSchema = z.object({
@@ -33,9 +32,6 @@ const ai = new GoogleGenAI({});
 export async function POST(request: NextRequest) {
   try {
     //1.ユーザーの質問に適したSQL文をAIに考えてもらう
-    if (!execSchema) {
-      throw new Error("データベースのスキーマが取得できませんでした。");
-    }
 
     const { prompt } = await request.json();
     const aiSqlRes = await ai.models.generateContent({
@@ -43,14 +39,13 @@ export async function POST(request: NextRequest) {
       contents: prompt,
       config: {
         systemInstruction: [
-          "あなたはSQLエンジニアです。後に示す日本の手ぶら観光カウンター一覧のデータベースを扱っています。ユーザーの質問に関連するカウンターを取得するために、適切なSQL文の一部分を生成してください。",
+          "あなたはSQLエンジニアです。後に示す日本の手ぶら観光カウンター一覧のデータベースを扱っています。プロンプトでユーザーの旅程を送るのでその旅程内で利用できそうなカウンターを取得するために、適切なSQL文の一部分を生成してください。",
           "出力はSQL文の「SELECT * FROM counter」以降だけを考えてください。また、解説はいりません。",
           `データベースはsqlite。prismaを使用しています。テーブル名はcounterです。スキーマは以下の通りです。
-            ${execSchema[1]}
+            ${counterSchema}
             `,
-          "カラム名は英数字の方ではなく、絶対に@map内で使用されている日本語のカラム名を使用してください。",
+          "カウンターの住所を絞るときは特に指定されない限り都道府県単位で絞ってください。",
           "廃止フラグ(is_closed)は0のレコードしか残していません。そのため廃止フラグについてwhere句で処理をする必要はありません。",
-          "都道府県を検索するときは「カウンター住所_都道府県コード」のカラムで日本の都道府県コードの数字を使って検索してください。",
         ],
       },
     });
@@ -62,7 +57,7 @@ export async function POST(request: NextRequest) {
     );
 
     //3.検索結果とユーザーの質問をAIに渡して、最終的な回答をAIに出してもらう
-    console.log(dbResult);
+    console.log(Array.isArray(dbResult) ? dbResult.length : "0件");
     let aiRes;
     if (!Array.isArray(dbResult) || dbResult.length === 0) {
       return NextResponse.json({
@@ -76,11 +71,20 @@ export async function POST(request: NextRequest) {
         contents: prompt,
         config: {
           systemInstruction: [
-            `あなたは日本の手ぶら観光カウンターについて詳しい人です。手ぶら観光カウンター一覧のデータベースから、ユーザーの質問に関連しそうな手ぶら観光カウンターを既にいくつかピックアップしてあります。ピックアップしたデータは以下に示します。このデータを元に、このユーザーの質問に答えてください。
+            `あなたは日本の手ぶら観光カウンターについて詳しい人です。手ぶら観光カウンター一覧のデータベースから、ユーザーの旅程に関連しそうな手ぶら観光カウンターを既にいくつかピックアップしてあります。以下のデータを元に、このユーザーの旅程に合った手ぶら観光カウンターの利用スケジュールを考えてください。
           
           JSONデータ（文字に変換済み）:
           ${JSON.stringify(dbResult)}
           `,
+            `適切なスケジュールを組めるときは文中でスケジュールを書いてください。スケジュールは大体
+          (日時)：(カウンター名)で(サービスの種類 一時預かり/当日配送/一般配送/海外配送)
+          ↓
+          (日時)：(カウンター名)で受け取り
+          ...以下続く
+          のように書いてください。多少変えてもいいです。
+          `,
+            "適切なスケジュールが組めないときは、利用できそうなカウンターにはこれらがあったということだけ示してください。無理にスケジュールを立てる必要はありません。",
+            "カウンターを示すときはカウンター名だけでいいです。ID、住所などは指定されない限りその他の情報はanswerに書かないでください。",
           ],
           responseMimeType: "application/json",
           responseJsonSchema: z.toJSONSchema(aiResSchema),
@@ -101,7 +105,7 @@ export async function POST(request: NextRequest) {
   } catch (e) {
     console.log("エラー" + e);
     return NextResponse.json({
-      success:false,
+      success: false,
       message: "AIのAPI呼び出し失敗",
       res: "エラーが発生しました。再度お試しください。：" + e,
     });

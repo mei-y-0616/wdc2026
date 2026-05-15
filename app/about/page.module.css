@@ -112,7 +112,7 @@
 .AboutMeritInner {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 3.5rem;
+    gap:3%;
     padding-top: 50px;
 }
 
@@ -240,9 +240,18 @@
     .AboutMeritInner,
     .AboutMannerInner {
         flex-direction: column;
-        gap: 2rem;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 70px;
     }
-
+    .AboutInnerFlex{
+        gap: 15px;
+    }
+    .AboutInnerImg{
+        width: 75%;
+    }
+    .CounterInnerImgWrapper{
+        width: 75%;
+    }
     .AboutContents,
     .AboutCard,
     .CounterInnerP,
