@@ -5,7 +5,7 @@ import SectTitle from "@/components/SectTitle/SectTitle";
 import Image from "next/image";
 import { ReactNode, useState } from "react";
 import Link from "next/link";
-import { SubmitErrorHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import IsSubmit from "./IsSubmit";
 import type FormValues from "@/types/formValues";
 

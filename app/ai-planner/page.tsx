@@ -1,4 +1,3 @@
-import "dotenv/config";
 import ClientAiPlanner from "./ClientAiPlanner";
 
 export const metadata = {
