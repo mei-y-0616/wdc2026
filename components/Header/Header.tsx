@@ -4,11 +4,55 @@ import styles from "./Header.module.css";
 import Image from "next/image";
 import { useState } from "react";
 
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 export default function Header() {
+  const header = useRef(null);
+  useGSAP(
+    () => {
+      let showHideHeader = ScrollTrigger.create({
+        start: "top top",
+        end: 99999,
+        onUpdate: (self) => {
+          // スクロール方向が下（self.direction === 1）ならヘッダーを隠す
+          // スクロール方向が上（self.direction === -1）ならヘッダーを表示
+          if (self.direction === 1) {
+            gsap.to(header.current, {
+              y: -100,
+              autoAlpha: 0,
+              duration: 0.2,
+              ease: "power3.out",
+            });
+          } else {
+            gsap.to(header.current, {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.2,
+              ease: "power3.out",
+            });
+          }
+        },
+        // ページの一番上にいる時は常に表示する
+        onLeaveBack: () => {
+          gsap.to(header.current, { y: 0, autoAlpha: 1, duration: 0.3 });
+        },
+      });
+    },
+    { scope: header },
+  );
+
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <header className={`${styles.header} ${isActive ? styles.isActive : ""}`}>
+    <header
+      className={`${styles.header} ${isActive ? styles.isActive : ""}`}
+      ref={header}
+    >
       <div className="wrapper">
         <div className={styles.headerPc}>
           <h1 className={styles.logo}>

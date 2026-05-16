@@ -64,6 +64,7 @@
     width: 20px;
     height: 16px;
     position: relative;
+    rotate: -180deg;
     transition: rotate 0.25s;
 }
 
@@ -75,7 +76,7 @@
 }
 
 .isOpen.faq .faqHeadIcon {
-    rotate: -180deg;
+    rotate: 0deg;
 }
 
 /*form*/

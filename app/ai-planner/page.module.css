@@ -152,6 +152,12 @@
   background-color: #4D6983;
 }
 
+.errorMsg{
+  color: red;
+  text-align: center;
+    margin-top: 5px;
+}
+
 
 /*response*/
 .responseTitle {

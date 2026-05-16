@@ -22,38 +22,44 @@ export default function ClientAiPlanner() {
   const [countersId, setCountersId] = useState<number[]>([]);
   const [countersData, setCountersData] = useState<Array<counter>>([]);
   const [isThinking, setIsThinking] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   gsap.registerPlugin(useGSAP);
   useGSAP(() => {
     if (response) {
-      gsap.to(window,{
-        duration:1,
-        scrollTo:{y:"#response",offsetY:100}
-      })
+      gsap.to(window, {
+        duration: 1,
+        scrollTo: { y: "#response", offsetY: 100 },
+      });
     }
   }, [response]);
 
   async function handleSubmit(e: any) {
     e.preventDefault();
 
-    setResponse(null);
-    setCountersData([]);
-    setIsThinking(true);
+    if (prompt === "") {
+      setErrorMsg("旅程を入力してください。");
+      return;
+    } else {
+      setErrorMsg(null);
+      setResponse(null);
+      setCountersData([]);
+      setIsThinking(true);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/ai`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt: prompt }),
+      });
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/ai`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ prompt: prompt }),
-    });
-
-    const data = await res.json();
-    setResponse(data.res);
-    setIsThinking(false);
-    if (data.counters) {
-      setCountersId(data.counters);
+      const data = await res.json();
+      setResponse(data.res);
+      setIsThinking(false);
+      if (data.counters) {
+        setCountersId(data.counters);
+      }
     }
   }
 
@@ -61,14 +67,17 @@ export default function ClientAiPlanner() {
   useEffect(() => {
     if (countersId.length === 0) return;
     async function fetchCounter(countersId: number[]) {
-      const countersRes = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/prisma/search-counter-data`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+      const countersRes = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/api/prisma/search-counter-data`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ where: { id: { in: countersId } } }),
         },
-        body: JSON.stringify({ where: { id: { in: countersId } } }),
-      });
+      );
       const counters = await countersRes.json();
       if (counters.res) {
         setCountersData(counters.res);
@@ -84,11 +93,11 @@ export default function ClientAiPlanner() {
         <section className={isThinking ? styles.isThinking : ""}>
           <div className={styles.intro}>
             <h3> AI手ぶら観光プランナーとは？</h3>
-            <p>あなたの旅行のスケジュール（いつ、どこに行くか）を入力すると、AIが最適な手ぶら観光カウンターの利用計画を提案してくれます。</p>
+            <p>
+              あなたの旅行のスケジュール（いつ、どこに行くか）を入力すると、AIが最適な手ぶら観光カウンターの利用計画を提案してくれます。
+            </p>
           </div>
-          <span className={styles.formDeco}>
-            Let's!
-          </span>
+          <span className={styles.formDeco}>Let's!</span>
           <form onSubmit={handleSubmit} className={styles.formArea} id="form">
             <label className={styles.promptLabel} htmlFor="prompt">
               ここにあなたの旅行のスケジュールを入力
@@ -116,7 +125,12 @@ export default function ClientAiPlanner() {
                 />
               </div>
             </button>
-            {isThinking&&<p className={styles.loadingNote}>返答までに数十秒かかります。少々お待ちください。</p>}
+            {errorMsg && <p className={styles.errorMsg}>{errorMsg}</p>}
+            {isThinking && (
+              <p className={styles.loadingNote}>
+                返答までに数十秒かかります。少々お待ちください。
+              </p>
+            )}
           </form>
 
           {response && (
