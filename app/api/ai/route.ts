@@ -6,13 +6,7 @@ import { z } from "zod";
 import counterSchema from "@/data/counterSchema";
 import { shorteningCounterData } from "@/utils/counter/counterDbFuns";
 
-//データベースのスキーマを取得
-// const pnt = /model counter \{([^*]+)\}/;
-// let schema = fs.readFileSync(
-//   path.join(process.cwd(), "prisma/schema.prisma"),
-//   "utf-8",
-// );
-// const execSchema = pnt.exec(schema);
+
 
 //responseSchema用
 const aiResSchema = z.object({
