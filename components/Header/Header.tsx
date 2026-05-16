@@ -30,7 +30,7 @@ export default function Header() {
                 <Link href="/">TOP</Link>
               </li>
               <li>
-                <Link href="/about">手ぶら観光とは</Link>
+                <Link href="/about">手ぶら観光について</Link>
               </li>
               <li>
                 <Link href="/guide">利用方法</Link>
@@ -93,7 +93,7 @@ export default function Header() {
                   setIsActive(false);
                 }}
               >
-                手ぶら観光とは
+                手ぶら観光について
               </Link>
             </li>
             <li>

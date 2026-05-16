@@ -112,7 +112,7 @@ export default function Guide() {
                     カウンターに荷物を持っていき、申し込む
                   </h3>
                   <p className={styles.HowCardP}>
-                    必要事項を記入して料金を支払い、荷物を引き渡します。
+                    カウンターで必要事項を記入して料金を支払い、荷物を引き渡します。
                     手ぶら観光カウンターに認定されているカウンターは全て英語での対応が可能であるため、海外からの観光客の方々でも安心して利用できます。
                   </p>
                   <p className={styles.HowCardNote}>
@@ -177,7 +177,7 @@ export default function Guide() {
               </div>
 
               <p className={styles.PriceAnnotation}>
-                ※上記の料金は目安です。利用カウンターや荷物の大きさ、配送距離などによって変動します。
+                ※上記の利用方法は一例です。カウンターにより詳細が異なる場合がありますので、ご利用前に公式サイト等でご確認ください。{" "}
               </p>
             </section>
 
@@ -243,7 +243,7 @@ export default function Guide() {
           </div>
         </div>
       </div>
-      <BeforeFooter/>
+      <BeforeFooter />
     </>
   );
 }

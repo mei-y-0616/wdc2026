@@ -68,10 +68,11 @@
 }
 
 .SectionP {
-  font-size: 1rem;
+  /* font-size: 1rem; */
   font-style: normal;
   font-weight: 400;
   line-height: 1.5rem;
+  font-size: clamp(.9375rem, 1.2vw, 1.2rem);
 }
 
 
@@ -99,7 +100,7 @@
 .SectionButtonWrap_About a,
 .SectionButtonWrap_Counter a,
 .SectionButtonWrap_Service a {
-  font-size: 1rem;
+  font-size: clamp(0.9375rem, 1.2vw, 1.3rem);
   padding: 0.8rem 0.5rem 0.8rem 1rem;
 }
 
@@ -112,7 +113,7 @@
 .SectionButtonWrap_Service {
   display: flex;
   justify-content: flex-end;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 /*About*/
@@ -124,7 +125,7 @@
 }
 
 .AboutTop .SectionP {
-  font-size: clamp(0.9rem, 1.3vw, 1.6rem);
+  font-size: clamp(0.9375rem, 1.3vw, 1.6rem);
   line-height: 1.6;
 }
 
@@ -184,7 +185,7 @@
   margin-top: 0.35rem;
   flex-shrink: 0;
   width: 20px;
-  height:auto;
+  height: auto;
 }
 
 .AboutSubTitle {
@@ -219,6 +220,7 @@
   column-gap: 3.75vw;
   row-gap: 16px;
   align-items: flex-start;
+  width: 53.75vw;
 }
 
 
@@ -274,6 +276,7 @@
 .CounterCircleWrap {
   position: relative;
   line-height: 0;
+  translate: 0 1px;
 }
 
 .CounterBg {
@@ -399,7 +402,9 @@
 }
 
 .CounterContents .SectionP {
-  font-size: clamp(0.8rem, 1.2vw, 1.3rem);
+  /* font-size: clamp(0.8rem, 1.2vw, 1.3rem); */
+  font-size: 1rem;
+  font-size: clamp(0.8rem, 1.2vw, 1.1rem);
   line-height: 1.6;
 }
 
@@ -466,7 +471,8 @@
 }
 
 .ServiceCardP {
-  font-size: 1rem;
+  /* font-size: 1rem; */
+  font-size: clamp(0.8rem, 1.2vw, 1.1rem);
   line-height: 1.8;
   color: #2c2c2c;
 }
@@ -812,12 +818,12 @@
   }
 
   .CounterContents .SectionP {
-    font-size: clamp(1rem, 3.5vw, 1.3rem);
+    font-size: clamp(0.9375rem, 3.5vw, 1rem);
   }
 
   .CounterTitle {
-    font-size: clamp(1.2rem, 4vw, 1.5rem);
-    margin-bottom: 3vw;
+    font-size: clamp(1.2rem, 4vw, 1.3rem);
+    margin-bottom: 2vw;
   }
 
   .HowNumberTitleSub {

@@ -155,7 +155,7 @@
 .HowCard::after {
     content: "";
     position: absolute;
-    bottom: -1.8rem;
+    bottom: calc(-1.8rem + 1px );
     left: 50%;
     transform: translateX(-50%);
     border-width: 1.8rem 1.5rem 0 1.5rem;

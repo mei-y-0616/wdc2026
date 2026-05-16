@@ -95,6 +95,7 @@
 .CounterInnerImgNote {
     word-break: break-all;
     font-size: 0.875rem;
+    color:#888;
 }
 
 .CounterInnerImg img {
@@ -142,7 +143,7 @@
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 700;
-
+    text-align: center;
     margin-bottom: 0.6rem;
 }
 

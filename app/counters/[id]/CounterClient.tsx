@@ -118,7 +118,7 @@ export default function CounterClient({
                   </div>
                 </div>
                 <div className={styles.counterMap}>
-                  <CounterMap counters={[c]} link={false} />
+                  <CounterMap counters={[c]} link={false} centerLat={c.latitude} centerLon={c.longitude}/>
                 </div>
               </div>
 

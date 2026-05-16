@@ -84,14 +84,14 @@ export default function ClientAiPlanner() {
         <section className={isThinking ? styles.isThinking : ""}>
           <div className={styles.intro}>
             <h3> AI手ぶら観光プランナーとは？</h3>
-            <p>あなたの旅行の計画（いつ、どこに行くか）を入力すると、AIが最適な手ぶら観光カウンターの利用プランを提案してくれます。</p>
+            <p>あなたの旅行のスケジュール（いつ、どこに行くか）を入力すると、AIが最適な手ぶら観光カウンターの利用計画を提案してくれます。</p>
           </div>
           <span className={styles.formDeco}>
             Let's!
           </span>
           <form onSubmit={handleSubmit} className={styles.formArea} id="form">
             <label className={styles.promptLabel} htmlFor="prompt">
-              ここにあなたの旅程を入力
+              ここにあなたの旅行のスケジュールを入力
             </label>
             <textarea
               id="prompt"

@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <div className={styles.mainVisual}></div>
       <section className={styles.AboutTop}>
-        <div className={styles.AboutContents_1}>
+        <div className={`wrapper ${styles.AboutContents_1}`}>
           <div className={styles.SectionText}>
             <h2 className={styles.SectionTitleEN}>About</h2>
             <h1 className={styles.SectionTitle}>
@@ -238,7 +238,7 @@ export default function Home() {
               について
             </h1>
             <p className={styles.SectionP}>
-              AIがあなたのためのカウンター利用計画や最適なパッキングについて提案してくれます。
+              あなたの旅行のスケジュールを入力すると、AIがあなたのためのカウンター利用計画を提案してくれます。
             </p>
             <div className={styles.SectionButtonWrap_Service}>
               <LinkButton path="/ai-planner" msg="AI手ぶら観光プランナー" />
@@ -247,10 +247,10 @@ export default function Home() {
           <div className={styles.ServiceContents}>
             <div className={styles.ServiceCardRight}>
               <p className={styles.ServiceCardNumber}>STEP 1</p>
-              <p className={styles.ServiceCardTitle}>旅の詳細を入力！</p>
+              <p className={styles.ServiceCardTitle}>旅のスケジュールを入力！</p>
               <hr className={styles.ServiceDivider} />
               <p className={styles.ServiceCardP}>
-                日程、出発地や目的地など、旅行の工程についてをざっくり入力します。
+                日程、出発地や目的地など、旅行のスケジュールをざっくり入力します。
               </p>
             </div>
 
@@ -258,14 +258,14 @@ export default function Home() {
 
             <div className={styles.ServiceCardLeft}>
               <p className={styles.ServiceCardNumber}>STEP 2</p>
-              <p className={styles.ServiceCardTitle}>最適な利用計画を提案！</p>
+              <p className={styles.ServiceCardTitle}>AIが最適な利用計画を提案！</p>
               <hr className={styles.ServiceDivider} />
               <p className={styles.ServiceCardP}>
                 AIが最適な手ぶら観光カウンターの利用計画を自動で作成。どのカウンターで、いつ、預けるか配送するか、最適なプランをあなたの代わりに考えてくれます。
               </p>
             </div>
 
-            <div className={styles.ServiceArrow}></div>
+            {/* <div className={styles.ServiceArrow}></div>
 
             <div className={styles.ServiceCardRight}>
               <p className={styles.ServiceCardNumber}>STEP 3</p>
@@ -276,7 +276,7 @@ export default function Home() {
               <p className={styles.ServiceCardP}>
                 旅行に持っていくものを入力すれば、現地調達できるものや必須アイテムなども提案してくれます。
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

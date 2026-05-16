@@ -16,9 +16,13 @@ import LinkButton from "../LinkButton/LinkButton";
 const CounterMap = memo(function CounterMap({
   counters,
   link=true,
+  centerLat,
+  centerLon
 }: {
   counters: Array<counter>;
-  link:boolean
+  link:boolean;
+  centerLat?:number
+  centerLon?:number
 }) {
   const Markers = (props: { pois: Array<counter> }) => {
     return (
@@ -44,6 +48,7 @@ const CounterMap = memo(function CounterMap({
               onClick={handleMarkerClick}
               key={poi.id}
               position={location}
+              
             >
               <Pin
                 background={"#ff4c34ff"}
@@ -78,10 +83,11 @@ const CounterMap = memo(function CounterMap({
           defaultZoom={4.5}
           // defaultCenter={{ lat: counter.latitude, lng: counter.longitude }}
           defaultCenter={{
-            lat: 36,
-            lng: 138,
+            lat: centerLat??36,
+            lng: centerLon??138,
           }}
           mapId="aedb8120b0aa062b539f703f"
+          mapTypeControl={false}
         >
           <Markers pois={counters} />
         </Map>
