@@ -43,10 +43,10 @@ export default function Footer() {
                 <Link href="/contact#contact">お問い合わせ</Link>
               </li>
               <li>
-                <Link href="/">利用規約</Link>
+                <Link href="/terms">利用規約</Link>
               </li>
               <li>
-                <Link href="/">プライバシーポリシー</Link>
+                <Link href="/privacy">プライバシーポリシー</Link>
               </li>
             </ul>
           </div>

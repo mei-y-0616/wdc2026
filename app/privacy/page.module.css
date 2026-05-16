@@ -1,0 +1,26 @@
+
+.privacy{
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--side-margin);
+    padding-right: var(--side-margin);
+}
+.privacy>*{
+    padding: 20px 0;
+}
+.privacy>*>*{
+    margin-bottom: 5px;
+}
+.privacy h3{
+    font-size: 1.375rem;
+    margin-bottom: 10px;
+    color: var(--main);
+}
+.privacy ul{
+    list-style:disc;
+    list-style-position: inside;
+}
+.privacy a{
+    text-decoration: underline;
+}

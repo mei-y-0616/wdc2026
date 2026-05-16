@@ -9,6 +9,8 @@ const pathAltName: Record<string, string> = {
   counters: "カウンターを探す",
   contact: "お問い合わせ",
   "ai-planner": "AIプランナー",
+  "terms":"利用規約",
+  "privacy":"プライバシーポリシー",
 };
 
 export default function BreadCrumb({ pageName }: { pageName?: string }) {

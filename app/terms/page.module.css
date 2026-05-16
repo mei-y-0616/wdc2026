@@ -1,0 +1,26 @@
+
+.terms{
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--side-margin);
+    padding-right: var(--side-margin);
+}
+.terms>*{
+    padding: 20px 0;
+}
+.terms>*>*{
+    margin-bottom: 5px;
+}
+.terms h3{
+    font-size: 1.375rem;
+    margin-bottom: 10px;
+    color: var(--main);
+}
+.terms ul{
+    list-style:disc;
+    list-style-position: inside;
+}
+.terms a{
+    text-decoration: underline;
+}
