@@ -5,19 +5,13 @@ import SectTitle from "@/components/SectTitle/SectTitle";
 import Image from "next/image";
 import { ReactNode, useState } from "react";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
-import IsSubmit from "./IsSubmit"
+import { SubmitErrorHandler, useForm } from "react-hook-form";
+import IsSubmit from "./IsSubmit";
+import type FormValues from "@/types/formValues";
 
 // export const metadata = {
 //   title: "お問い合わせ",
 // };
-
-type FormValues = {
-  name: string;
-  kana: string;
-  mail: string;
-  content: string;
-};
 
 function FormItem({
   nameJa,
@@ -59,11 +53,10 @@ function FormItem({
   );
 }
 
-function Form({
-  setIsSubmit,
-}: {
-  setIsSubmit: (isSubmit: boolean) => void;
-}) {
+function Form({ setIsSubmit }: { setIsSubmit: (isSubmit: boolean) => void }) {
+  const [submitErrorMsg, setSubmitErrorMsg] = useState<string | null>();
+  const [isSubmitting,setIsSubmitting]=useState<boolean>(false)
+
   const {
     register, // input とフォームロジックを紐づける
     handleSubmit, // 送信時に呼ぶ
@@ -72,12 +65,32 @@ function Form({
 
   const onSubmit = (data: FormValues) => {
     // バリデーション OK のときだけ呼ばれる
-    window.scrollTo(0, 0)
-    setIsSubmit(true)
+    async function submitForm() {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/form`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const resData = await res.json();
+      console.log(resData.message);
+      if (resData.success) {
+        setSubmitErrorMsg(null);
+        window.scrollTo(0, 0);
+        setIsSubmit(true);
+      } else {
+        setSubmitErrorMsg(
+          "エラーが発生し送信できませんでした。再度お試しください。",
+        );
+      }
+    }
+    submitForm();
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form className={isSubmitting?`${styles.isSubmitting} ${styles.form}`:styles.form} onSubmit={handleSubmit(onSubmit)}>
       <FormItem
         nameJa="お名前"
         nameEn="name"
@@ -132,14 +145,16 @@ function Form({
             <p>【お問合せされる際の注意点】</p>
             <ul>
               <li>
-                お問い合わせには、原則として以下の受付時間内に対応させていただきます。
-                <br />
-                （サポート営業時間：平日9時～17時 土日祝日）
+                「送信する」ボタンを押すと、LuggGo!運営へ実際にお問い合わせが送信されます。
               </li>
               <li>
-                お問い合わせの混雑状況や内容により回答まで3営業日ほどお時間をいただく場合がございます。
-                <br />
-                あらかじめご了承ください。
+                回答はご記入いただいたメールアドレスにご連絡させていただきます。
+              </li>
+              <li>
+                お問い合わせの混雑状況や内容により回答までお時間をいただく場合がございます。あらかじめご了承ください。
+              </li>
+              <li>
+                お問い合わせが集中した場合、システムの都合により、お問い合わせの送信が一時的に失敗する場合がございます。
               </li>
             </ul>
           </div>
@@ -147,11 +162,15 @@ function Form({
       </div>
 
       <button className={styles.formBtn}>
-        <p>送信する</p>
+        <p>{isSubmitting?"送信中…":"送信する"}</p>
         <div className={styles.formBtnIcon}>
           <Image src="/images/icon_form_white.svg" alt="" fill />
         </div>
       </button>
+
+      {submitErrorMsg && (
+        <p className={styles.submitErrorMsg}>{submitErrorMsg}</p>
+      )}
     </form>
   );
 }
@@ -181,8 +200,9 @@ function FAQ({ q, a }: { q: string; a: ReactNode }) {
 
 export default function ContactClient() {
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
+
   if (isSubmit) {
-    return<IsSubmit/>
+    return <IsSubmit />;
   }
   return (
     <>

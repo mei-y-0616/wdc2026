@@ -190,6 +190,16 @@ font-size: 0.9375rem;
     height: 24px;
     width: 24px;
 }
+.submitErrorMsg{
+    margin-top: 20px;
+    color: red;
+    text-align: center;
+    font-size: 1rem;
+}
+.isSubmitting .formBtn{
+    pointer-events: none;
+    background-color: #4D6983;
+}
 
 @media screen and (max-width:768px) {
     /*faq*/

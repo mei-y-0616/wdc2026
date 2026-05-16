@@ -1,3 +1,44 @@
+.intro {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.intro h3 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: var(--light-main);
+}
+
+.intro p {
+  font-weight: 500;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.formDeco {
+  display: block;
+  width: fit-content;
+  background-color: var(--white);
+  font-weight: 700;
+  font-size: 1.25rem;
+  padding: 4px 18px;
+  border-radius: 5px;
+  margin: 0 auto 20px;
+  position: relative;
+}
+
+.formDeco::before {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  left: 50%;
+  translate: -50% 100%;
+  background-color: inherit;
+  width: 16px;
+  height: 12px;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+}
+
 .formArea {
   padding: 60px;
   background-color: var(--white);
@@ -78,7 +119,8 @@
 .loadingText {
   display: none;
 }
-.loadingNote{
+
+.loadingNote {
   margin-top: 15px;
   font-size: 0.9375rem;
   text-align: center;
@@ -93,10 +135,11 @@
   display: block;
 }
 
-.isThinking .submitText{
+.isThinking .submitText {
   display: none;
 }
-.isThinking .loadingText{
+
+.isThinking .loadingText {
   display: block;
 }
 
@@ -201,12 +244,27 @@
 
 
 @media screen and (max-width:768px) {
+  .intro h3{
+    font-size: 1.5rem;
+  }
+  .formDeco{
+    font-size: 1.125rem;
+    padding: 2px 16px;
+  }
+  .formDeco::before{
+    width: 14px;
+    height: 10px;
+
+  }
   .formArea {
     padding: 20px;
   }
 
   .promptLabel {
     font-size: 1.125rem;
+  }
+  .promptInput{
+    height: 350px;
   }
 
   .submitButton {

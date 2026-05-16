@@ -38,7 +38,7 @@
     top: 30px;
     align-self: flex-start;
     flex-shrink: 0;
-    padding-top: var(--section-padding);
+    padding-top: var(--first-section-padding);
 }
 
 .PageNav a {

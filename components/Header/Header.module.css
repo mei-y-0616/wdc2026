@@ -163,8 +163,12 @@
         height: 100vh;
         background-color: var(--white);
 
-        padding: 80px 20px 10px;
+        padding: 80px 0 10px;
         border-radius: 15px 0 0 15px;
+        min-width: 60%;
+        box-sizing: border-box;
+        border:2px solid var(--light-main);
+        border-right: none;
     }
 
     .header.isActive .drawerSp {
@@ -173,9 +177,17 @@
 
     .drawerListSp {
         font-weight: bold;
-        font-size: 0.9875rem;
+        font-size: 1.125rem;
+        border-top: 1px solid #dfdfdf;
+    }
+    .drawerListSp li a{
+        display: block;
+        padding: 15px 20px;
+    }
+    .drawerListSp li{
+        border-bottom: 1px solid #dfdfdf;
     }
     .drawerListSp li:not(:last-child){
-        margin-bottom: 10px;
+        /* margin-bottom: 10px; */
     }
 }
