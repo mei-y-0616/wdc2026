@@ -55,7 +55,7 @@ function FormItem({
 
 function Form({ setIsSubmit }: { setIsSubmit: (isSubmit: boolean) => void }) {
   const [submitErrorMsg, setSubmitErrorMsg] = useState<string | null>();
-  const [isSubmitting,setIsSubmitting]=useState<boolean>(false)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const {
     register, // input とフォームロジックを紐づける
@@ -65,22 +65,29 @@ function Form({ setIsSubmit }: { setIsSubmit: (isSubmit: boolean) => void }) {
 
   const onSubmit = (data: FormValues) => {
     // バリデーション OK のときだけ呼ばれる
+    setIsSubmitting(true);
     async function submitForm() {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/form`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const resData = await res.json();
-      console.log(resData.message);
-      if (resData.success) {
-        setSubmitErrorMsg(null);
-        window.scrollTo(0, 0);
-        setIsSubmit(true);
-      } else {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/form`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        const resData = await res.json();
+        console.log(resData.message);
+        if (resData.success) {
+          setIsSubmitting(false);
+          setSubmitErrorMsg(null);
+          window.scrollTo(0, 0);
+          setIsSubmit(true);
+        } else {
+          throw Error;
+        }
+      } catch {
+        setIsSubmitting(false);
         setSubmitErrorMsg(
           "エラーが発生し送信できませんでした。再度お試しください。",
         );
@@ -90,7 +97,12 @@ function Form({ setIsSubmit }: { setIsSubmit: (isSubmit: boolean) => void }) {
   };
 
   return (
-    <form className={isSubmitting?`${styles.isSubmitting} ${styles.form}`:styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={
+        isSubmitting ? `${styles.isSubmitting} ${styles.form}` : styles.form
+      }
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <FormItem
         nameJa="お名前"
         nameEn="name"
@@ -162,7 +174,7 @@ function Form({ setIsSubmit }: { setIsSubmit: (isSubmit: boolean) => void }) {
       </div>
 
       <button className={styles.formBtn}>
-        <p>{isSubmitting?"送信中…":"送信する"}</p>
+        <p>{isSubmitting ? "送信中…" : "送信する"}</p>
         <div className={styles.formBtnIcon}>
           <Image src="/images/icon_form_white.svg" alt="" fill />
         </div>
