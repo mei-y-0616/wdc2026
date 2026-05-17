@@ -1,8 +1,228 @@
-.mainVisual {
-  height: 80vh;
+/* メインビジュアル */
+/* MainVisual */
+.Mainvisual {
+  padding: 0.6rem 0 0 0;
   width: 100%;
-  background-color: rgb(206, 206, 206);
+  line-height: 0;
+  background-color:var(--white);
 }
+
+.MainvisualBg {
+  width: 100%;
+  position: relative;
+  line-height: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.MainvisualBg_pc {
+  display: block;
+  width: 100%;
+}
+
+.MainvisualBg_sp {
+  display: none;
+}
+
+.MainvisualLogo_Pc {
+  display: block;
+  width: 100%;
+}
+
+.MainvisualLogo_Sp {
+  display: none;
+}
+
+.MainvisualTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  z-index: 2;
+}
+
+.MainvisualTitle img {
+  width: 80vw !important;
+  height: auto;
+}
+
+.MainvisualLink {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+  gap: 2.5rem;
+}
+
+.MainVisualTree {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  line-height: 0;
+}
+
+.MainVisualTree img {
+  width: 100%;
+  display: block;
+}
+
+.SectionMainvisualButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #005CAF;
+  color: #F3F3F3;
+  text-decoration: none;
+  font-weight: 700;
+
+  font-size: clamp(1rem, 1.2vw, 1.5rem);
+  padding: clamp(0.5rem, 0.6vw, 0.8rem) clamp(0.5rem, 0.6vw, 0.8rem) clamp(0.5rem, 0.6vw, 0.8rem) clamp(1rem, 1.2vw, 1.8rem);
+  border-radius: 2rem;
+  margin-bottom: 1rem;
+
+  transition: background-color 0.2s ease;
+}
+
+.SectionMainvisualButton:hover {
+  background-color: #003f7a;
+}
+
+.SectionMainvisuaButtonArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #005CAF;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-left: 1rem;
+
+  transition: color 0.2s ease;
+}
+
+.MainvisualScroll {
+  display: flex;
+  justify-content: center;
+  color: #00896C;
+  font-size: clamp(1.2rem, 1vw, 1.5rem);
+  font-weight: bold;
+
+  margin-top: 2rem;
+}
+
+.SectionMainvisuaButton:hover .SectionButtonArrow {
+  color: #003f7a;
+}
+
+.SectionMainvisualText {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.SectionMainvisualTitleEN {
+  display: inline-block;
+  background-color: #fff;
+  font-size: clamp(1rem, 1.8vw, 2.2rem);
+  font-weight: bold;
+  padding: clamp(0.8rem, 2vw, 2rem);
+  border-radius: 1rem;
+  position: relative;
+}
+
+.SectionMainvisualTitleEN::after {
+  content: "";
+  position: absolute;
+  bottom: -0.625rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0.625rem 0.4375rem 0 0.4375rem;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+.SectionMainvisualTextSpan {
+  display: inline-block;
+  color: #00896C;
+  font-size: clamp(1.5rem, 2.2vw, 3rem);
+  font-weight: bold;
+}
+
+.Mainvisualsvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+  z-index: 3;
+}
+
+.Cloud1,
+.Cloud2,
+.Plane {
+  position: absolute;
+}
+
+.Cloud1 img,
+.Cloud2 img,
+.Plane img {
+  display: block;
+}
+
+.Cloud1 {
+  top: 15%;
+  left: 7%;
+  width: clamp(7.5rem, 1.6vw, 20rem);
+}
+
+.Cloud2 {
+  top: 10%;
+  right: 5%;
+  width: clamp(7rem, 1.6vw, 20rem);
+}
+
+.Plane {
+  top: 10%;
+  right: 40%;
+  width: clamp(7.5rem, 1.6vw, 20rem);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.Cloud1 {
+  animation: float 4s ease-in-out infinite;
+}
+
+.Cloud2 {
+  animation: float 5s ease-in-out infinite;
+  animation-delay: 1s;
+  /* 少しズラすとより自然に */
+}
+
+.Plane {
+  animation: float 3.5s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+/* メインビジュアル */
 
 /*section border-bottom 消去*/
 .AboutTop {
@@ -22,11 +242,6 @@
 
 .InformationTop {
   border-bottom: none !important;
-}
-
-
-.Mainvisual {
-  padding: 100px 0;
 }
 
 .SectionText {
@@ -125,6 +340,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  padding-top: 0 !important;
 }
 
 .AboutTop .SectionP {
@@ -160,14 +376,14 @@
 .AboutTopImg {
   position: relative;
   width: 37vw;
-  aspect-ratio: 1/1;
+  aspect-ratio: 337/237;
   height: auto;
 }
 
 .AboutTopImg img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .AboutContentsTopImg {
@@ -711,6 +927,199 @@
 
 @media screen and (max-width: 768px) {
 
+  /* メインビジュアル */
+  .Mainvisual {
+    padding: 0.6rem 0 0 0;
+    width: 100%;
+    line-height: 0;
+  }
+
+  .MainvisualBg {
+    width: 100%;
+    position: relative;
+    line-height: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .MainvisualBg_pc {
+    display: none;
+  }
+
+  .MainvisualBg_sp {
+    display: block;
+    width: 100%;
+  }
+
+  .MainvisualLogo_Pc {
+    display: none;
+  }
+
+  .MainvisualLogo_Sp {
+    display: block;
+    width: 100%;
+  }
+
+  .MainvisualTitle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    z-index: 2;
+  }
+
+  .MainvisualTitle img {
+    width: 80vw;
+    height: auto;
+  }
+
+  .MainvisualLink {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .MainVisualTree {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 60%);
+    z-index: 1;
+  }
+
+  .MainVisualTree {
+    width: 100%;
+    display: block;
+  }
+
+  .SectionMainvisualButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #005CAF;
+    color: #F3F3F3;
+    text-decoration: none;
+    font-weight: 700;
+
+    font-size: 1.1rem;
+    padding: 0.6rem 0.6rem 0.6rem 1rem;
+    border-radius: 2rem;
+    margin-bottom: 1rem;
+
+    transition: background-color 0.2s ease;
+  }
+
+  .SectionMainvisualButton:hover {
+    background-color: #003f7a;
+  }
+
+  .SectionMainvisuaButtonArrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #005CAF;
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    border-radius: 2rem;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+  }
+
+  .MainvisualScroll {
+    display: flex;
+    justify-content: center;
+    color: #00896C;
+    font-size: clamp(1.2rem, 1vw, 1.5rem);
+    font-weight: bold;
+
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .SectionMainvisuaButton:hover .SectionButtonArrow {
+    color: #003f7a;
+  }
+
+  .SectionMainvisualText {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .SectionMainvisualTitleEN {
+    display: inline-block;
+    background-color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    position: relative;
+  }
+
+  .SectionMainvisualTitleEN::after {
+    content: "";
+    position: absolute;
+    bottom: -0.625rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0.625rem 0.4375rem 0 0.4375rem;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+  }
+
+  .SectionMainvisualTextSpan {
+    display: inline-block;
+    color: #00896C;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .Mainvisualsvg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    z-index: 3;
+  }
+
+  .Cloud1 img,
+  .Cloud2 img,
+  .Plane img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .Cloud1 {
+    position: absolute;
+    top: 18%;
+    left: 2%;
+    width: 5rem;
+  }
+
+  .Cloud2 {
+    position: absolute;
+    top: 40%;
+    right: 5%;
+    width: 5rem;
+  }
+
+  .Plane {
+    position: absolute;
+    top: 18%;
+    right: 6%;
+    width: 5rem;
+  }
+
+  /* メインビジュアル */
+
   .AboutTop {
     overflow: visible;
     padding-bottom: calc(var(--section-padding) + 30px);
@@ -1005,9 +1414,9 @@
   .LogoSVG svg {
     height: auto;
   } */
-   .CounterTop{
+  .CounterTop {
     padding-top: 23vw;
-   }
+  }
 
   .CounterFlex {
     display: flex;

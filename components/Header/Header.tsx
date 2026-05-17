@@ -6,52 +6,44 @@ import { useState } from "react";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import { Observer } from "gsap/dist/Observer";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+gsap.registerPlugin(useGSAP, Observer);
 
 export default function Header() {
-  const header = useRef(null);
-  useGSAP(
-    () => {
-      let showHideHeader = ScrollTrigger.create({
-        start: "top top",
-        end: 99999,
-        onUpdate: (self) => {
-          // スクロール方向が下（self.direction === 1）ならヘッダーを隠す
-          // スクロール方向が上（self.direction === -1）ならヘッダーを表示
-          if (self.direction === 1) {
-            gsap.to(header.current, {
-              y: -100,
-              autoAlpha: 0,
-              duration: 0.4,
-              ease: "power2.out",
-            });
-          } else {
-            gsap.to(header.current, {
-              y: 0,
-              autoAlpha: 1,
-              duration:0.4,
-              ease: "power2.out",
-            });
-          }
+  const headerRef = useRef(null);
+  useGSAP(() => {
+    if (typeof window !== "undefined") {
+      const header = headerRef.current;
+      Observer.create({
+        target: window,
+        type: "scroll",
+        tolerance: 50,
+        onUp: () => {
+          gsap.to(header, {
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          });
         },
-        // ページの一番上にいる時は常に表示する
-        onLeaveBack: () => {
-          gsap.to(header.current, { y: 0, autoAlpha: 1, duration: 0.3 });
+        onDown: () => {
+          gsap.to(header, {
+            y: "-100%",
+            duration: 0.5,
+            ease: "power2.out",
+          });
         },
       });
-    },
-    { scope: header },
-  );
+    }
+  }, []);
 
   const [isActive, setIsActive] = useState(false);
 
   return (
     <header
       className={`${styles.header} ${isActive ? styles.isActive : ""}`}
-      ref={header}
+      ref={headerRef}
     >
       <div className="wrapper">
         <div className={styles.headerPc}>

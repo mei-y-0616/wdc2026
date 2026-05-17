@@ -5,8 +5,9 @@ import Image from "next/image";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin();
+gsap.registerPlugin(useGSAP,ScrollTrigger);
 
 export default function ClientTop() {
   useGSAP(() => {
@@ -87,7 +88,110 @@ export default function ClientTop() {
 
   return (
     <>
-      <div className={styles.mainVisual}></div>
+      {/* メインビジュアル */}
+      <div className={styles.Mainvisual}>
+        <div className={styles.MainvisualBg}>
+          <Image
+            alt=""
+            className={styles.MainvisualBg_pc}
+            src="/images/mainvisualbg.svg"
+            width={0}
+            height={0}
+            style={{ width: "100%", height: "auto" }}
+          />
+          <Image
+            alt=""
+            className={styles.MainvisualBg_sp}
+            src="/images/Mainvisualbgsp.svg"
+            width={0}
+            height={0}
+            style={{ width: "100%", height: "auto" }}
+          />
+          <div className={styles.MainvisualTitle}>
+            <Image
+              alt=""
+              className={styles.MainvisualLogo_Pc}
+              src="/images/MainvisualLogo.svg"
+              width={0}
+              height={0}
+              style={{ width: "100%", height: "auto" }}
+            />
+            <Image
+              alt=""
+              className={styles.MainvisualLogo_Sp}
+              src="/images/MainvisualLogoSp.svg"
+              width={0}
+              height={0}
+              style={{ width: "100%", height: "auto" }}
+            />
+            <div className={styles.MainvisualLink}>
+              <a className={styles.SectionMainvisualButton} href="">
+                <span className={styles.SectionButtonText}>
+                  AI手ぶらカウンター
+                </span>
+                <span className={styles.SectionMainvisuaButtonArrow}>→</span>
+              </a>
+              <a className={styles.SectionMainvisualButton} href="">
+                <span className={styles.SectionButtonText}>
+                  手ぶら観光カウンターを探す
+                </span>
+                <span className={styles.SectionMainvisuaButtonArrow}>→</span>
+              </a>
+            </div>
+            <div className={styles.SectionMainvisualText}>
+              <h2 className={styles.SectionMainvisualTitleEN}>
+                <span className={styles.SectionMainvisualTextSpan}>
+                  手ぶら観光
+                </span>{" "}
+                について知る
+              </h2>
+            </div>
+            <div className={styles.MainvisualScroll}>
+              <p>scroll!</p>
+            </div>
+          </div>
+          <div className={styles.Mainvisualsvg}>
+            <div className={styles.Cloud1}>
+              <Image
+                alt=""
+                src="/images/cloud1.svg"
+                width={0}
+                height={0}
+                style={{ width: "100%", height: "auto" }}
+              />
+            </div>
+            <div className={styles.Cloud2}>
+              <Image
+                alt=""
+                src="/images/cloud2.svg"
+                width={0}
+                height={0}
+                style={{ width: "100%", height: "auto" }}
+              />
+            </div>
+            <div className={styles.Plane}>
+              <Image
+                alt=""
+                src="/images/plane.svg"
+                width={0}
+                height={0}
+                style={{ width: "100%", height: "auto" }}
+              />
+            </div>
+          </div>
+          <div className={styles.MainVisualTree}>
+            <Image
+              alt=""
+              src="/images/Mainvisualtree.svg"
+              width={0}
+              height={0}
+              style={{ width: "100%", height: "auto" }}
+            />
+          </div>
+        </div>
+      </div>
+      {/* メインビジュアル */}
+
       <section className={styles.AboutTop}>
         <div className={`wrapper ${styles.AboutContents_1}`}>
           <div className={styles.SectionText}>
@@ -108,7 +212,7 @@ export default function ClientTop() {
               fill
               src="/images/img_top_about1.png"
               alt=""
-              sizes="37vw 37vw"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </div>
