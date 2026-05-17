@@ -1,23 +1,32 @@
 /* メインビジュアル */
 /* MainVisual */
 .Mainvisual {
-  padding: 0.6rem 0 0 0;
   width: 100%;
   line-height: 0;
-  background-color:var(--white);
+  background-color: var(--white);
+  padding: 0.6rem 0.8rem 0;
+  position: relative;
+  overflow-x: clip;
 }
 
 .MainvisualBg {
+  border-radius: 24px;
   width: 100%;
   position: relative;
   line-height: 0;
   z-index: 0;
-  overflow: hidden;
+  overflow: visible;
+  padding-top: 130px;
+  background: linear-gradient(to bottom, #97D2FF 0%, #DBEFFF 100%);
+  overflow-y: clip;
 }
 
 .MainvisualBg_pc {
   display: block;
   width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 .MainvisualBg_sp {
@@ -34,16 +43,19 @@
 }
 
 .MainvisualTitle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -60%);
-  z-index: 2;
+  /* position: absolute; */
+  /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    z-index: 2; */
+  position: relative;
+  z-index: 10;
 }
 
 .MainvisualTitle img {
-  width: 80vw !important;
+  width: 80vw;
   height: auto;
+  margin: 0 auto;
 }
 
 .MainvisualLink {
@@ -53,19 +65,46 @@
   gap: 2.5rem;
 }
 
+/* 
 .MainVisualTree {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 3;
   line-height: 0;
+  overflow: visible;
+} */
+
+.MainvisualWhiteCircle {
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+  bottom: 0;
+  left: 0;
+  translate:0 1px;
 }
 
-.MainVisualTree img {
-  width: 100%;
-  display: block;
+/* .MainVisualTree img {
+    width: 100%;
+    display: block;
+} */
+.MainvisualTreeLeft {
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 14%;
+  z-index: 3;
 }
+
+.MainvisualTreeRight {
+  position: absolute;
+  right: 0;
+  bottom: -10px;
+  z-index: 3;
+  width: 15%;
+}
+
 
 .SectionMainvisualButton {
   display: inline-flex;
@@ -81,11 +120,24 @@
   border-radius: 2rem;
   margin-bottom: 1rem;
 
-  transition: background-color 0.2s ease;
+  box-shadow:
+    0 5px 0 #003a75;
+
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .SectionMainvisualButton:hover {
-  background-color: #003f7a;
+  background-color: #0068c7;
+  box-shadow:
+    0 4px 0 #003a75;
+  transform: translateY(3px);
+}
+
+.SectionMainvisualButton:active {
+  box-shadow:
+    0 1px 0 #003a75,
+    0 2px 6px rgba(0, 60, 120, 0.2);
+  transform: translateY(5px);
 }
 
 .SectionMainvisuaButtonArrow {
@@ -110,7 +162,7 @@
   color: #00896C;
   font-size: clamp(1.2rem, 1vw, 1.5rem);
   font-weight: bold;
-
+  line-height: 1;
   margin-top: 2rem;
 }
 
@@ -139,7 +191,7 @@
   position: absolute;
   bottom: -0.625rem;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-1px);
   border-width: 0.625rem 0.4375rem 0 0.4375rem;
   border-style: solid;
   border-color: #fff transparent transparent transparent;
@@ -188,7 +240,7 @@
 }
 
 .Plane {
-  top: 10%;
+  top: 12%;
   right: 40%;
   width: clamp(7.5rem, 1.6vw, 20rem);
 }
@@ -222,7 +274,7 @@
   animation-delay: 0.5s;
 }
 
-/* メインビジュアル */
+/* メインビジュアル ここまで*/
 
 /*section border-bottom 消去*/
 .AboutTop {
@@ -929,9 +981,9 @@
 
   /* メインビジュアル */
   .Mainvisual {
-    padding: 0.6rem 0 0 0;
+    padding: 0.6rem 0.8rem 0;
     width: 100%;
-    line-height: 0;
+    /* line-height: 0; */
   }
 
   .MainvisualBg {
@@ -939,7 +991,8 @@
     position: relative;
     line-height: 0;
     z-index: 0;
-    overflow: hidden;
+    padding-top: 80px;
+    /* overflow: hidden; */
   }
 
   .MainvisualBg_pc {
@@ -949,6 +1002,9 @@
   .MainvisualBg_sp {
     display: block;
     width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 
   .MainvisualLogo_Pc {
@@ -958,14 +1014,15 @@
   .MainvisualLogo_Sp {
     display: block;
     width: 100%;
+    max-width: 400px;
   }
 
   .MainvisualTitle {
-    position: absolute;
-    top: 50%;
+    /* position: absolute; */
+    /* top: 50%;
     left: 50%;
-    transform: translate(-50%, -40%);
-    z-index: 2;
+    transform: translate(-50%, -40%); */
+    z-index: 10;
   }
 
   .MainvisualTitle img {
@@ -1065,7 +1122,7 @@
     position: absolute;
     bottom: -0.625rem;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(-1px);
     border-width: 0.625rem 0.4375rem 0 0.4375rem;
     border-style: solid;
     border-color: #fff transparent transparent transparent;

@@ -6,8 +6,9 @@ import LinkButton from "@/components/LinkButton/LinkButton";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
-gsap.registerPlugin(useGSAP,ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function ClientTop() {
   useGSAP(() => {
@@ -92,51 +93,54 @@ export default function ClientTop() {
       <div className={styles.Mainvisual}>
         <div className={styles.MainvisualBg}>
           <Image
-            alt=""
             className={styles.MainvisualBg_pc}
-            src="/images/mainvisualbg.svg"
+            src="/images/Mainvisualbg_hill.svg"
+            alt=""
             width={0}
             height={0}
             style={{ width: "100%", height: "auto" }}
           />
           <Image
-            alt=""
             className={styles.MainvisualBg_sp}
-            src="/images/Mainvisualbgsp.svg"
+            src="/images/Mainvisualbgsp_hill.svg"
+            alt=""
             width={0}
             height={0}
             style={{ width: "100%", height: "auto" }}
           />
           <div className={styles.MainvisualTitle}>
             <Image
-              alt=""
               className={styles.MainvisualLogo_Pc}
-              src="/images/Mainvisuallogo.svg"
+              src="/images/MainvisualLogo.svg"
+              alt=""
               width={0}
               height={0}
-              style={{ width: "100%", height: "auto" }}
+              style={{ width: "80vw", height: "auto" }}
             />
             <Image
-              alt=""
               className={styles.MainvisualLogo_Sp}
               src="/images/MainvisualLogoSp.svg"
+              alt=""
               width={0}
               height={0}
-              style={{ width: "100%", height: "auto" }}
+              style={{ width: "80vw", height: "auto"}}
             />
             <div className={styles.MainvisualLink}>
-              <a className={styles.SectionMainvisualButton} href="">
+              <Link
+                href="/ai-planner"
+                className={styles.SectionMainvisualButton}
+              >
                 <span className={styles.SectionButtonText}>
-                  AI手ぶらカウンター
+                  AI手ぶら観光プランナー
                 </span>
                 <span className={styles.SectionMainvisuaButtonArrow}>→</span>
-              </a>
-              <a className={styles.SectionMainvisualButton} href="">
+              </Link>
+              <Link href="/counters" className={styles.SectionMainvisualButton}>
                 <span className={styles.SectionButtonText}>
                   手ぶら観光カウンターを探す
                 </span>
                 <span className={styles.SectionMainvisuaButtonArrow}>→</span>
-              </a>
+              </Link>
             </div>
             <div className={styles.SectionMainvisualText}>
               <h2 className={styles.SectionMainvisualTitleEN}>
@@ -153,8 +157,8 @@ export default function ClientTop() {
           <div className={styles.Mainvisualsvg}>
             <div className={styles.Cloud1}>
               <Image
-                alt=""
                 src="/images/cloud1.svg"
+                alt=""
                 width={0}
                 height={0}
                 style={{ width: "100%", height: "auto" }}
@@ -162,8 +166,8 @@ export default function ClientTop() {
             </div>
             <div className={styles.Cloud2}>
               <Image
-                alt=""
                 src="/images/cloud2.svg"
+                alt=""
                 width={0}
                 height={0}
                 style={{ width: "100%", height: "auto" }}
@@ -171,24 +175,48 @@ export default function ClientTop() {
             </div>
             <div className={styles.Plane}>
               <Image
-                alt=""
                 src="/images/plane.svg"
+                alt=""
                 width={0}
                 height={0}
                 style={{ width: "100%", height: "auto" }}
               />
             </div>
           </div>
-          <div className={styles.MainVisualTree}>
-            <Image
-              alt=""
-              src="/images/Mainvisualtree.svg"
-              width={0}
-              height={0}
-              style={{ width: "100%", height: "auto" }}
-            />
-          </div>
+          {/* <div className={styles.MainVisualTree}>
+            <img src="/images/Mainvisualtree.svg" alt="" />
+          </div> */}
+          <Image
+            className={styles.MainvisualWhiteCircle}
+            src="/images/Mainvisual_white_circle.svg"
+            alt=""
+            width={0}
+            height={0}
+            style={{ width: "100%", height: "auto" }}
+          />
         </div>
+        <Image
+          className={styles.MainvisualTreeLeft}
+          src="/images/Mainvisual_tree_left.svg"
+          alt=""
+          width={0}
+          height={0}
+          style={{
+            width: "14%",
+            height: "auto",
+          }}
+        />
+        <Image
+          className={styles.MainvisualTreeRight}
+          src="/images/Mainvisual_tree_right.svg"
+          alt=""
+          width={0}
+          height={0}
+          style={{
+            width: "15%",
+            height: "auto",
+          }}
+        />
       </div>
       {/* メインビジュアル */}
 
