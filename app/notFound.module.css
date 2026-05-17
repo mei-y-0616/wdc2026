@@ -1,5 +1,6 @@
 .notFound {
     text-align: center;
+    padding: var(--section-padding) 0;
 }
 
 .notFound p {

@@ -6,10 +6,7 @@ import TagList from "@/components/counter/TagList/TagList";
 import CounterMap from "@/components/CounterMap/CounterMap";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import DetailItem from "@/components/counter/DetailItem/DetailItem";
-import {
-  getParsePhone,
-  getLanguage,
-} from "@/utils/counter/counterFuns";
+import { getParsePhone, getLanguage } from "@/utils/counter/counterFuns";
 import RunTime from "@/components/counter/RunTime/RunTime";
 import { parseTime } from "@/utils/counter/counterFuns";
 import LinkButton from "@/components/LinkButton/LinkButton";
@@ -69,11 +66,7 @@ export default function CounterClient({
                   <div className={styles.counterDetailLeft}>
                     <DetailItem
                       imageSrc="/images/icon_map_gray.svg"
-                      explain={
-                        <p>
-                          {c.x_full_address_ja}
-                        </p>
-                      }
+                      explain={<p>{c.x_full_address_ja}</p>}
                     />
                     <DetailItem
                       imageSrc="/images/icon_phone_gray.svg"
@@ -101,16 +94,17 @@ export default function CounterClient({
                       <DetailItem
                         imageSrc="/images/icon_url_gray.svg"
                         explain={
-                          <p>
+                          <p style={{ wordBreak: "break-all" }}>
                             関連サイトURL：
-                            <Link
+                            {/* <Link
                               href={c.website_url}
                               className="break-all"
                               target="_blank"
                               rel="noopener noreferrer"
                             >
                               {c.website_url}
-                            </Link>
+                            </Link> */}
+                            <span>{c.website_url}</span>
                           </p>
                         }
                       />
@@ -118,7 +112,12 @@ export default function CounterClient({
                   </div>
                 </div>
                 <div className={styles.counterMap}>
-                  <CounterMap counters={[c]} link={false} centerLat={c.latitude} centerLon={c.longitude}/>
+                  <CounterMap
+                    counters={[c]}
+                    link={false}
+                    centerLat={c.latitude}
+                    centerLon={c.longitude}
+                  />
                 </div>
               </div>
 
