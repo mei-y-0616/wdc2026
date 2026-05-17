@@ -111,7 +111,7 @@ export default function ClientTop() {
             <Image
               alt=""
               className={styles.MainvisualLogo_Pc}
-              src="/images/MainvisualLogo.svg"
+              src="/images/Mainvisuallogo.svg"
               width={0}
               height={0}
               style={{ width: "100%", height: "auto" }}
