@@ -12,34 +12,29 @@ gsap.registerPlugin(useGSAP, ScrollToPlugin);
 
 export default function PageNav({ linkAry }: { linkAry: links }) {
   const container = useRef(null);
+  const { contextSafe } = useGSAP({ scope: container });
 
-  useGSAP(
-    () => {
-      const links = gsap.utils.toArray(".pageNavLink");
-      console.log(links);
-      links.forEach((link: any) => {
-        const name = link.getAttribute("href");
-        link.addEventListener("click", function (e: any) {
-          e.preventDefault();
-          gsap.to(window, {
-            duration:0.6,
-            ease: "power2.out",
-            scrollTo: {
-              y: name,
-
-            },
-          });
-        });
-      });
-    },
-    { scope: container },
-  );
+  const handleClick = contextSafe((e: any) => {
+    e.preventDefault();
+    if (!e.currentTarget) {
+      return;
+    }
+    const target = e.currentTarget as HTMLElement;
+    const name = target.getAttribute("href")??"";
+    gsap.to(window, {
+      duration: 0.6,
+      ease: "power2.out",
+      scrollTo: {
+        y: name,
+      },
+    });
+  });
 
   return (
     <nav className={styles.PageNav} ref={container}>
       <div className={styles.PageNavEN}>
         <div className={styles.flower}>
-          <Image src="/images/img_flower.svg" alt="" fill />
+          <Image src="/images/img_flower.svg" alt="" fill sizes="16px" />
         </div>
         navigation
       </div>
@@ -47,7 +42,11 @@ export default function PageNav({ linkAry }: { linkAry: links }) {
         {linkAry.map((child, i) => {
           return (
             <li key={i}>
-              <Link href={`#${child.href}`} className="pageNavLink">
+              <Link
+                href={`#${child.href}`}
+                className="pageNavLink"
+                onClick={handleClick}
+              >
                 {child.name}
               </Link>
             </li>

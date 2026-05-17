@@ -11,7 +11,10 @@
 
 .CounterTop {
   border-bottom: none !important;
+  /* overflow: hidden; */
+  padding-bottom: 0;
 }
+
 
 .ServiceTop {
   border-bottom: none !important;
@@ -233,6 +236,29 @@
 }
 
 .LogoSVG {
+  position: absolute;
+  /* top: -10vw; */
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 180vw;
+  aspect-ratio: 1/1;
+  z-index: 0;
+  animation: circleLoop 180s linear infinite;
+  rotate: 0;
+}
+
+@keyframes circleLoop {
+  from {
+    rotate: 0deg;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* .LogoSVG {
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -241,16 +267,18 @@
   z-index: 1;
   margin-bottom: -9rem;
   margin-top: 2rem;
-}
+} */
 
-.LogoSVG svg {
+/* .LogoSVG svg {
   width: clamp(1278px, 100%, 1980px);
   height: auto;
-}
+} */
 
 /*Counter*/
 .CounterTop {
   position: relative;
+  padding-top: 19vw;
+  overflow: hidden;
 }
 
 .SectionTextCounter {
@@ -263,10 +291,12 @@
   background-color: #fff;
   padding: 0;
   font-size: 0;
+  position: relative;
+  z-index: 10;
 }
 
 .SectionCounterBg_Circle {
-  position: absolute;
+  /* position: absolute; */
   top: 5rem;
   left: 0;
   width: 100%;
@@ -307,7 +337,7 @@
 .CounterFlex {
   display: flex;
   justify-content: center;
-  padding-top: 6rem;
+  padding-top: 4rem;
   padding-left: clamp(4rem, 8%, 16rem);
   padding-right: clamp(4rem, 8%, 16rem);
   gap: 3vw;
@@ -411,9 +441,19 @@
 /*Service*/
 
 .ServiceTop {
-  margin-top: 2rem;
-  padding: 0 clamp(4rem, 8%, 6rem);
-  margin-bottom: 8rem;
+
+  padding-left: clamp(1rem, 8%, 6rem);
+  padding-right: clamp(1rem, 8%, 6rem);
+  padding-bottom: 200px;
+  padding-top: 20px;
+
+  /*追加*/
+  background-color: var(--background);
+  position: relative;
+  z-index: 10;
+  margin-bottom: 0 !important;
+
+  margin-top: 0;
 }
 
 .ServiceFlex {
@@ -619,8 +659,7 @@
 @media screen and (max-width: 1100px) {
   .ServiceTop {
     margin-top: 1rem;
-    padding: 0 1.2rem;
-    margin-bottom: 8rem;
+    /* margin-bottom: 8rem; */
   }
 
   .ServiceFlex {
@@ -674,6 +713,7 @@
 
   .AboutTop {
     overflow: visible;
+    padding-bottom: calc(var(--section-padding) + 30px);
   }
 
   .AboutContents_1 {
@@ -741,6 +781,7 @@
   .SectionButtonWrap_Counter {
     justify-content: center;
     margin-top: 4rem;
+    padding-bottom: 40px;
   }
 
   .SectionButtonWrap_Service {
@@ -777,13 +818,13 @@
   }
 
   /* Counter */
-
+  /* 
   .CounterCircleWrap {
     position: relative;
     line-height: 0;
-  }
+  } */
 
-  .LogoSVG {
+  /* .LogoSVG {
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -796,22 +837,22 @@
 
   .LogoSVG svg {
     height: auto;
-  }
+  } */
 
-  .CounterBg {
+  /* .CounterBg {
     width: 100%;
   }
 
   .CounterBg img {
     width: 100%;
     display: block;
-  }
+  } */
 
 
-  .CounterTop {
+  /* .CounterTop {
     margin-top: 2rem;
     padding: 0;
-  }
+  } */
 
   .CounterImg img {
     width: 50vw;
@@ -845,7 +886,7 @@
 
   .SectionCounterBg {
     margin: 0;
-    padding-top: 6rem;
+    /* padding-top: 6rem; */
   }
 
   .CounterFlex {
@@ -855,7 +896,7 @@
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 6rem;
+    padding-top: 3.5rem;
     padding-left: clamp(2rem, 8%, 16rem);
     padding-right: clamp(2rem, 8%, 16rem);
   }
@@ -874,7 +915,9 @@
   }
 
   .ServiceTop {
-    margin-top: 3.5rem;
+    /* margin-top: 3.5rem; */
+    padding-top: 16px;
+    padding-bottom: 140px;
   }
 
   .InformationTop {
@@ -908,7 +951,7 @@
 @media screen and (max-width: 650px) {
 
 
-  .LogoSVG {
+  /* .LogoSVG {
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -921,7 +964,7 @@
 
   .LogoSVG svg {
     height: auto;
-  }
+  } */
 
 
   .AboutTopImg img {
@@ -948,7 +991,7 @@
     width: 100%;
   }
 
-  .LogoSVG {
+  /* .LogoSVG {
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -961,12 +1004,15 @@
 
   .LogoSVG svg {
     height: auto;
-  }
+  } */
+   .CounterTop{
+    padding-top: 23vw;
+   }
 
   .CounterFlex {
     display: flex;
     justify-content: center;
-    padding-top: 8rem;
+    /* padding-top: 8rem; */
     padding-left: clamp(4rem, 8%, 16rem);
     padding-right: clamp(4rem, 8%, 16rem);
     gap: 3vw;
@@ -990,7 +1036,7 @@
     align-items: center;
     gap: 2rem;
 
-    padding-top: 11rem;
+    /* padding-top: 11rem; */
     padding-left: clamp(2rem, 8%, 16rem);
     padding-right: clamp(2rem, 8%, 16rem);
   }

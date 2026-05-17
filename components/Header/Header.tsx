@@ -25,15 +25,15 @@ export default function Header() {
             gsap.to(header.current, {
               y: -100,
               autoAlpha: 0,
-              duration: 0.2,
-              ease: "power3.out",
+              duration: 0.4,
+              ease: "power2.out",
             });
           } else {
             gsap.to(header.current, {
               y: 0,
               autoAlpha: 1,
-              duration: 0.2,
-              ease: "power3.out",
+              duration:0.4,
+              ease: "power2.out",
             });
           }
         },

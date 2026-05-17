@@ -1,6 +1,7 @@
 .beforeFooter {
     position: relative;
     width: 100%;
+    z-index: 10;
 }
 
 .wave {
@@ -8,6 +9,42 @@
     height: 22px;
     background-image: url(/images/bg_beforeFooter_wave.svg);
     background-repeat: repeat-x;
+    animation: wave 6s ease-in-out infinite, slide 30s linear infinite;
+    transform-origin: bottom center;
+    translate: 0 1px;
+}
+
+@keyframes wave {
+    0% {
+        transform: scaleY(60%);
+
+    }
+
+    25% {
+        transform: scaleY(80%);
+    }
+
+    50% {
+        transform: scaleY(40%);
+    }
+
+    75% {
+        transform: scaleY(100%);
+    }
+
+    100% {
+        transform: scaleY(60%);
+    }
+}
+
+@keyframes slide {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 1280px 0;
+    }
 }
 
 .surfing {
@@ -18,6 +55,7 @@
     right: 20px;
     translate: 0 -60%;
     rotate: -8deg;
+    z-index: 20;
 }
 
 .surfing img {
@@ -166,9 +204,10 @@
 }
 
 @media screen and (max-width:768px) {
-    .surfing{
+    .surfing {
         display: none;
     }
+
     .main {
         padding-top: 50px;
     }
