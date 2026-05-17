@@ -111,7 +111,7 @@ export default function ClientTop() {
           <div className={styles.MainvisualTitle}>
             <Image
               className={styles.MainvisualLogo_Pc}
-              src="/images/MainvisualLogo.svg"
+              src="/images/Mainvisuallogo.svg"
               alt=""
               width={0}
               height={0}

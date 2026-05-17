@@ -79,10 +79,11 @@
 .MainvisualWhiteCircle {
   position: absolute;
   width: 100%;
+  height: auto;
   z-index: 5;
   bottom: 0;
   left: 0;
-  translate:0 1px;
+  /* translate:0 1px; */
 }
 
 /* .MainVisualTree img {
