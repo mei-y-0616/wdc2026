@@ -37,20 +37,20 @@ export async function POST(request: NextRequest) {
           `データベースはsqlite。prismaを使用しています。テーブル名はcounterです。スキーマは以下の通りです。
             ${counterSchema}
             `,
-          "カウンターの住所を絞るときは都道府県単位で絞ってください。",
+          "カウンターの住所を絞るときは、「カウンター住所_都道府県コード」で絞ってください。取得したデータを元に後から再度処理するので、今回は広めに検索してください。",
           "廃止フラグ(is_closed)は0のレコードしか残していません。そのため廃止フラグについてwhere句で処理をする必要はありません。",
         ],
       },
     });
 
     //2.AIが考えてくれたSQL文を元にデータベースを検索
-    console.log(aiSqlRes.text);
+    // console.log(aiSqlRes.text);
     const dbResult = await prisma.$queryRaw(
       Prisma.raw(`SELECT カウンターID FROM counter ${aiSqlRes.text}`),
     );
 
     //3.検索結果とユーザーの質問をAIに渡して、最終的な回答をAIに出してもらう
-    console.log(Array.isArray(dbResult) ? dbResult.length : "0件");
+    // console.log(Array.isArray(dbResult) ? dbResult.length : "0件");
 
     let aiRes;
     if (!Array.isArray(dbResult) || dbResult.length === 0) {
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
         throw Error
       }
       const JSONdata = JSON.stringify(shortData);
-      console.log(shortData)
+      // console.log(shortData)
       aiRes = await ai.models.generateContent({
         model: "gemini-2.5-flash",
         contents: prompt,
@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
       });
     }
   } catch (e) {
-    console.log("エラー" + e);
+    // console.log("エラー" + e);
     return NextResponse.json({
       success: false,
       message: "AIのAPI呼び出し失敗",

@@ -77,7 +77,7 @@ function Form({ setIsSubmit }: { setIsSubmit: (isSubmit: boolean) => void }) {
           body: JSON.stringify(data),
         });
         const resData = await res.json();
-        console.log(resData.message);
+        // console.log(resData.message);
         if (resData.success) {
           setIsSubmitting(false);
           setSubmitErrorMsg(null);
