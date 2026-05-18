@@ -53,7 +53,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.footerBottom}>
-          <p className={styles.copy}>© 2026 LuggGo</p>
+          <p className={styles.copy}>© 2026 LuggGo!</p>
           <p className={styles.footerBottomNote}>
             当Webサイトは「手ぶら観光カウンター情報オープンデータ」(国土交通省)(https://www.mlit.go.jp/seisakutokatsu/freight/seisakutokatsu_freight_tk1_000141.html)を元に作成しました。
           </p>

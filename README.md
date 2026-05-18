@@ -6,6 +6,9 @@ LuggGo!は日本の手ぶら観光、及び手ぶら観光カウンターに関�
 以下のURLから、実際にデプロイした本サイトをご覧いただけます。是非ご覧ください。
 [https://lugggo.up.railway.app/](https://lugggo.up.railway.app/)
 
+また、以下のURLから、「AI手ぶら観光プランナー」のデモンストレーション動画をご覧いただけます。（YouTube限定公開）
+[https://youtu.be/Q_sWUrRBPXQ](https://youtu.be/Q_sWUrRBPXQ)
+
 提出したソースコードは以下のフォルダを除外しています。
 - node_modules/
 - .next/
