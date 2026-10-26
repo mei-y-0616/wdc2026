@@ -2,7 +2,7 @@
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { counter } from "@prisma/client";
 import { areaObj } from "@/data/pref_code";
 import { Prisma } from "@prisma/client";
@@ -345,7 +345,77 @@ function SearchResult({
   );
 }
 
-//ページネーション変わるたびにリロード入ってる
+// 1ページあたりの最大表示件数
+const limit = 20;
+
+function createWhere(
+  areas: Array<keyof typeof areaObj>,
+  services: Array<string>,
+  searchText: Array<string>,
+) {
+  const where: Prisma.counterWhereInput = {};
+  where.AND = [];
+  //地域絞り込み
+  if (areas.length !== 0) {
+    const prefAry: number[] = [];
+    for (let id of areas) {
+      prefAry.push(...areaObj[id]?.prefs);
+    }
+    where.AND.push({ pref_code: { in: prefAry } });
+  }
+
+  // サービス絞り込み
+  if (services.length !== 0) {
+    const OR: Prisma.counterWhereInput[] = [];
+    services.map((service) => {
+      OR.push({ [service]: 1 });
+    });
+    where.AND.push({ OR: OR });
+  }
+
+  //検索ワードで絞り込み
+  if (searchText.length >= 1) {
+    const AND: Prisma.counterWhereInput[] = [];
+    const targetColumns = [
+      "company_name_ja",
+      "company_name_en",
+      "counter_name_ja",
+      "counter_name_en",
+      "x_full_address_ja",
+      "address_en",
+      "station_name_ja",
+      "station_name_en",
+    ];
+
+    searchText.forEach((text) => {
+      const OR: Prisma.counterWhereInput[] = [];
+      targetColumns.forEach((column) => {
+        OR.push({
+          [column]: {
+            contains: text,
+          },
+        });
+      });
+      AND.push({ OR: OR });
+    });
+    where.AND.push({ AND: AND });
+  }
+
+  return where;
+}
+
+async function postJson(path: string, body: unknown) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}${path}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+  return res.json();
+}
+
 export default function ClientCounters() {
   const [countersData, setCountersData] = useState<Array<counter>>([]);
   const [count, setCount] = useState<number>(0);
@@ -356,122 +426,68 @@ export default function ClientCounters() {
   const [searchText, setSearchText] = useState<Array<string>>([]);
   const [display, setDisplay] = useState<"list" | "map">("list");
 
-  // 初期設定
-  // 1ページあたりの最大表示件数
-  const limit = 20;
-  // const areasAry=areas.split(",");
-  // const servicesAry=services.split(",")
+  const searchBarRef = useRef<HTMLDivElement>(null);
   const skip = (page - 1) * limit;
+  const where = useMemo(
+    () => createWhere(areas, services, searchText),
+    [areas, services, searchText],
+  );
 
-  function prismaCreateWhere() {
-    const where: Prisma.counterWhereInput = {};
-    where.AND = [];
-    //地域絞り込み
-    if (areas.length !== 0) {
-      const prefAry: number[] = [];
-      for (let id of areas) {
-        prefAry.push(...areaObj[id]?.prefs);
-      }
-      where.AND.push({ pref_code: { in: prefAry } });
-    }
-
-    // サービス絞り込み
-    if (services.length !== 0) {
-      const OR: Prisma.counterWhereInput[] = [];
-      services.map((service) => {
-        OR.push({ [service]: 1 });
-      });
-      where.AND.push({ OR: OR });
-    }
-
-    //検索ワードで絞り込み
-    if (searchText.length >= 1) {
-      const AND: Prisma.counterWhereInput[] = [];
-      const targetColumns = [
-        "company_name_ja",
-        "company_name_en",
-        "counter_name_ja",
-        "counter_name_en",
-        "x_full_address_ja",
-        "address_en",
-        "station_name_ja",
-        "station_name_en",
-      ];
-
-      searchText.forEach((text) => {
-        const OR: Prisma.counterWhereInput[] = [];
-        targetColumns.forEach((column) => {
-          OR.push({
-            [column]: {
-              contains: text,
-            },
-          });
-        });
-        AND.push({ OR: OR });
-      });
-      where.AND.push({ AND: AND });
-    }
-
-    return where;
+  // 検索バーが画面上部に来る位置までスクロールする
+  function scrollToSearchBar() {
+    searchBarRef.current?.scrollIntoView({ block: "start" });
   }
 
-  async function fetchDataCounter() {
-    // console.log("fetchDataCounter");
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/prisma/search-counter-data`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          skip: display === "list" ? skip : undefined,
-          take: display === "list" ? limit : undefined,
-          where: prismaCreateWhere(),
-        }),
-      },
-    );
-    const data = await res.json();
-    if (Array.isArray(data.res)) {
-      setCountersData(data.res);
-    }
-  }
-
-  useEffect(() => {
-    // console.log("use effect areas,services");
-    async function fetchDataNum() {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/prisma/search-counter-num`,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            where: prismaCreateWhere(),
-          }),
-        },
-      );
-      const data = await res.json();
-      setCount(data.count);
-    }
-    fetchDataNum();
-    // if (page === 1) {
-    //   fetchDataCounter();
-    // } else {
-    //   setPage(1);
-    // }
-    fetchDataCounter();
+  // 検索条件を変えるときは1ページ目に戻し、スクロール位置も検索バーに戻す
+  function handleAreasChange(nextAreas: Array<keyof typeof areaObj>) {
+    setAreas(nextAreas);
     setPage(1);
-  }, [areas, services, searchText, display]);
+    scrollToSearchBar();
+  }
+  function handleServicesChange(nextServices: Array<string>) {
+    setServices(nextServices);
+    setPage(1);
+    scrollToSearchBar();
+  }
+  function handleSearchTextChange(nextSearchText: Array<string>) {
+    setSearchText(nextSearchText);
+    setPage(1);
+    scrollToSearchBar();
+  }
+  function handlePageChange(nextPage: number) {
+    setPage(nextPage);
+    scrollToSearchBar();
+  }
+  function handleDisplayChange(nextDisplay: "list" | "map") {
+    setDisplay(nextDisplay);
+    setPage(1);
+  }
 
+  // 検索結果の総件数（ページには依存しない）
   useEffect(() => {
-    if (page === 1) return;
-    // console.log("use effect page");
-    fetchDataCounter();
-  }, [page]);
+    let ignore = false;
+    postJson("/api/prisma/search-counter-num", { where }).then((data) => {
+      if (!ignore) setCount(data.count);
+    });
+    return () => {
+      ignore = true;
+    };
+  }, [where]);
+
+  // 表示するカウンター一覧
+  useEffect(() => {
+    let ignore = false;
+    postJson("/api/prisma/search-counter-data", {
+      skip: display === "list" ? skip : undefined,
+      take: display === "list" ? limit : undefined,
+      where,
+    }).then((data) => {
+      if (!ignore && Array.isArray(data.res)) setCountersData(data.res);
+    });
+    return () => {
+      ignore = true;
+    };
+  }, [where, display, skip]);
 
   // console.log(countersData);
   return (
@@ -487,11 +503,13 @@ export default function ClientCounters() {
       ></PageTitle>
       <div className="inner">
         <section>
-          <SearchText
-            searchTextTmp={searchTextTmp}
-            setSearchTextTmp={setSearchTextTmp}
-            setSearchText={setSearchText}
-          ></SearchText>
+          <div ref={searchBarRef} className={styles.searchBarAnchor}>
+            <SearchText
+              searchTextTmp={searchTextTmp}
+              setSearchTextTmp={setSearchTextTmp}
+              setSearchText={handleSearchTextChange}
+            ></SearchText>
+          </div>
 
           <SearchResult
             searchText={searchText}
@@ -505,15 +523,15 @@ export default function ClientCounters() {
 
           <SwitchDisplay
             display={display}
-            setDisplay={setDisplay}
+            setDisplay={handleDisplayChange}
           ></SwitchDisplay>
 
           <div className={styles.searchTagAndCounters}>
             <SearchTag
               areas={areas}
               services={services}
-              onAreasChange={setAreas}
-              onServicesChange={setServices}
+              onAreasChange={handleAreasChange}
+              onServicesChange={handleServicesChange}
             ></SearchTag>
 
             {display === "list" && (
@@ -607,7 +625,7 @@ export default function ClientCounters() {
                     count={count}
                     limit={limit}
                     page={page}
-                    onPageChange={setPage}
+                    onPageChange={handlePageChange}
                   ></Pager>
                 )}
               </div>

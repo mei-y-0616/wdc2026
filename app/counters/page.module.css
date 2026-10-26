@@ -109,6 +109,11 @@
 
 /*------*/
 /* SearchText */
+/* スクロール先。固定ヘッダーに隠れないよう余白を取る */
+.searchBarAnchor {
+    scroll-margin-top: 100px;
+}
+
 .searchText {
     margin-bottom: 15px;
 }
