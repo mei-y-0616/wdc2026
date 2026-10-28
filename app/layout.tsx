@@ -1,4 +1,3 @@
-import { Zen_Kaku_Gothic_New } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
@@ -7,12 +6,6 @@ import Footer from "@/components/Footer/Footer";
 //   variable: "--font-geist-sans",
 //   subsets: ["latin"],
 // });
-
-const zenKakuGothicNew = Zen_Kaku_Gothic_New({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700", "900"],
-  display: "swap",
-});
 
 export const metadata = {
   title: {
@@ -44,8 +37,21 @@ export const metadata = {
 export default function RootLayout({ children }: { children: any }) {
   return (
     <html lang="ja">
+      {/* next/font/google だと日本語フォントの全スライスをビルド時に取得してタイムアウトするため、ブラウザ側で読み込む */}
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap"
+        />
+      </head>
       {/* <body className={`${geistSans.variable} ${geistMono.variable}`}> */}
-      <body className={zenKakuGothicNew.className}>
+      <body>
         <Header></Header>
         <main>{children}</main>
         <Footer></Footer>
