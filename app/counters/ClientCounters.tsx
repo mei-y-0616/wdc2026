@@ -9,6 +9,7 @@ import { Prisma } from "@prisma/client";
 import CounterMap from "@/components/CounterMap/CounterMap";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import LinkButton from "@/components/LinkButton/LinkButton";
+import Button from "@/components/Button/Button";
 import { getParsePhone, getLanguage } from "@/utils/counter/counterFuns";
 import TagList from "@/components/counter/TagList/TagList";
 import RunTime from "@/components/counter/RunTime/RunTime";
@@ -21,16 +22,30 @@ const serviceObj: Record<string, string> = {
   has_delivery_overseas: "海外配送",
 };
 
+const languageObj: Record<string, string> = {
+  lang_en: "英語",
+  lang_zh_cn: "中国語(簡体字)",
+  lang_zh_tw: "中国語(繁体字)",
+  lang_ko: "韓国語",
+  lang_th: "タイ語",
+};
+
 function SearchTag({
   areas,
   services,
+  languages,
   onAreasChange,
   onServicesChange,
+  onLanguagesChange,
+  onClear,
 }: {
   areas: Array<keyof typeof areaObj>;
   services: Array<string>;
+  languages: Array<string>;
   onAreasChange: (areas: Array<keyof typeof areaObj>) => void;
   onServicesChange: (services: Array<string>) => void;
+  onLanguagesChange: (languages: Array<string>) => void;
+  onClear: () => void;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -93,6 +108,36 @@ function SearchTag({
       </ul>
     );
   }
+  function FromLanguage() {
+    function handleClick(currentLanguage: string) {
+      if (languages.includes(currentLanguage)) {
+        const nextLanguages = languages.filter(
+          (language) => language !== currentLanguage,
+        );
+        onLanguagesChange(nextLanguages);
+      } else {
+        const nextLanguages = [...languages, currentLanguage];
+        onLanguagesChange(nextLanguages);
+      }
+    }
+
+    return (
+      <ul className={`${styles.buttonList} ${styles.fromLanguage}`}>
+        {Object.entries(languageObj).map(([key, value]) => {
+          return (
+            <li key={key}>
+              <button
+                className={languages.includes(key) ? styles.isSelectedTag : ""}
+                onClick={() => handleClick(key)}
+              >
+                {value}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
 
   return (
     <div
@@ -113,26 +158,41 @@ function SearchTag({
 
       <div className={styles.searchTag}>
         <h3 className={styles.searchTagTitle}>検索フィルター</h3>
-        <div className={styles.searchTagTitleSub}>
-          <Image
-            src="/images/icon_area_green.svg"
-            width={18}
-            height={18}
-            alt="アイコン"
-          ></Image>
-          <h4>エリアで絞り込み</h4>
+        <div className={styles.searchTagFilters}>
+          <div className={styles.searchTagTitleSub}>
+            <Image
+              src="/images/icon_area_green.svg"
+              width={18}
+              height={18}
+              alt="アイコン"
+            ></Image>
+            <h4>エリアで絞り込み</h4>
+          </div>
+          <FromArea></FromArea>
+          <div className={styles.searchTagTitleSub}>
+            <Image
+              src="/images/icon_service_green.svg"
+              width={18}
+              height={18}
+              alt="アイコン"
+            ></Image>
+            <h4>対応サービスで絞り込み</h4>
+          </div>
+          <FromService></FromService>
+          <div className={styles.searchTagTitleSub}>
+            <Image
+              src="/images/icon_lang_green.svg"
+              width={18}
+              height={18}
+              alt="アイコン"
+            ></Image>
+            <h4>対応言語で絞り込み</h4>
+          </div>
+          <FromLanguage></FromLanguage>
         </div>
-        <FromArea></FromArea>
-        <div className={styles.searchTagTitleSub}>
-          <Image
-            src="/images/icon_service_green.svg"
-            width={18}
-            height={18}
-            alt="アイコン"
-          ></Image>
-          <h4>対応サービスで絞り込み</h4>
-        </div>
-        <FromService></FromService>
+        <Button className={styles.clearButton} onClick={onClear}>
+          検索をクリア
+        </Button>
       </div>
     </div>
   );
@@ -291,6 +351,7 @@ function SearchResult({
   searchText,
   areas,
   services,
+  languages,
   count,
   start,
   limit,
@@ -299,6 +360,7 @@ function SearchResult({
   searchText: Array<string>;
   areas: Array<keyof typeof areaObj>;
   services: Array<string>;
+  languages: Array<string>;
   count: number;
   start: number;
   limit: number;
@@ -318,10 +380,18 @@ function SearchResult({
       searchAry.push(serviceObj[child]);
     });
   }
+  if (languages.length > 0) {
+    languages.forEach((child) => {
+      searchAry.push(languageObj[child]);
+    });
+  }
 
   return (
     <p className={styles.searchResult}>
-      {(areas.length > 0 || services.length > 0 || searchText.length > 0) && (
+      {(areas.length > 0 ||
+        services.length > 0 ||
+        languages.length > 0 ||
+        searchText.length > 0) && (
         <>
           {searchAry.map((word, index) => (
             <span key={index}>
@@ -351,6 +421,7 @@ const limit = 20;
 function createWhere(
   areas: Array<keyof typeof areaObj>,
   services: Array<string>,
+  languages: Array<string>,
   searchText: Array<string>,
 ) {
   const where: Prisma.counterWhereInput = {};
@@ -369,6 +440,15 @@ function createWhere(
     const OR: Prisma.counterWhereInput[] = [];
     services.map((service) => {
       OR.push({ [service]: 1 });
+    });
+    where.AND.push({ OR: OR });
+  }
+
+  // 対応言語絞り込み
+  if (languages.length !== 0) {
+    const OR: Prisma.counterWhereInput[] = [];
+    languages.forEach((language) => {
+      OR.push({ [language]: 1 });
     });
     where.AND.push({ OR: OR });
   }
@@ -422,6 +502,7 @@ export default function ClientCounters() {
   const [page, setPage] = useState<number>(1);
   const [areas, setAreas] = useState<Array<keyof typeof areaObj>>([]);
   const [services, setServices] = useState<Array<string>>([]);
+  const [languages, setLanguages] = useState<Array<string>>([]);
   const [searchTextTmp, setSearchTextTmp] = useState<string>("");
   const [searchText, setSearchText] = useState<Array<string>>([]);
   const [display, setDisplay] = useState<"list" | "map">("list");
@@ -429,8 +510,8 @@ export default function ClientCounters() {
   const searchBarRef = useRef<HTMLDivElement>(null);
   const skip = (page - 1) * limit;
   const where = useMemo(
-    () => createWhere(areas, services, searchText),
-    [areas, services, searchText],
+    () => createWhere(areas, services, languages, searchText),
+    [areas, services, languages, searchText],
   );
 
   // 検索バーが画面上部に来る位置までスクロールする
@@ -446,6 +527,21 @@ export default function ClientCounters() {
   }
   function handleServicesChange(nextServices: Array<string>) {
     setServices(nextServices);
+    setPage(1);
+    scrollToSearchBar();
+  }
+  function handleLanguagesChange(nextLanguages: Array<string>) {
+    setLanguages(nextLanguages);
+    setPage(1);
+    scrollToSearchBar();
+  }
+  // 全ての検索条件（絞り込み・フリーワード）をクリアする
+  function handleClearAll() {
+    setAreas([]);
+    setServices([]);
+    setLanguages([]);
+    setSearchTextTmp("");
+    setSearchText([]);
     setPage(1);
     scrollToSearchBar();
   }
@@ -515,6 +611,7 @@ export default function ClientCounters() {
             searchText={searchText}
             areas={areas}
             services={services}
+            languages={languages}
             count={count}
             start={skip}
             limit={limit}
@@ -530,8 +627,11 @@ export default function ClientCounters() {
             <SearchTag
               areas={areas}
               services={services}
+              languages={languages}
               onAreasChange={handleAreasChange}
               onServicesChange={handleServicesChange}
+              onLanguagesChange={handleLanguagesChange}
+              onClear={handleClearAll}
             ></SearchTag>
 
             {display === "list" && (

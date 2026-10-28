@@ -254,6 +254,26 @@
 }
 
 
+.fromLanguage button {
+    background-color: var(--light-main);
+    border: none;
+    color: var(--white);
+}
+
+.fromLanguage button.isSelectedTag {
+    outline: 2px solid var(--light-main);
+    background-color: var(--white);
+    color: var(--font);
+}
+
+.searchTagFilters {
+    margin-bottom: 20px;
+}
+
+.searchTag .clearButton {
+    width: 100%;
+}
+
 .buttonList button {
     font-weight: 500;
     border-radius: 5px;
